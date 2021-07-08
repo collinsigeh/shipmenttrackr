@@ -13,6 +13,16 @@
 
                 <div class="card-body">
 
+                    @if (session('error_status'))
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            {{ session('error_status') }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show">
                             <ul>
@@ -34,10 +44,8 @@
                                     Existing sender
                                 </div>
 
-                                <form action="{{ route('shipments.newshipment') }}" method="post">
+                                <form action="{{ route('shipments.existingsender') }}" method="post">
                                     @csrf
-
-                                    <input type="hidden" name="sender_type" value="Existing sender">
         
                                     <div class="form-group row">
                                         <label for="select_sender" class="col-md-4 col-form-label text-md-right">{{ __('Select a sender') }}</label>
@@ -74,10 +82,8 @@
                                     New sender
                                 </div>
                                 
-                                <form action="{{ route('shipments.newshipment') }}" method="post">
+                                <form action="{{ route('shipments.newsender') }}" method="post">
                                     @csrf
-
-                                    <input type="hidden" name="sender_type" value="New sender">
         
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Sender name') }}</label>
