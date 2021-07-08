@@ -15,3 +15,20 @@
 .my-table-link-view:hover{
     font-style: italic;
 }
+
+.my-table-link-delete{
+    color: #ff0000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.my-table-link-delete:hover{
+    color: #ff0000;
+    font-style: italic;
+}
+
+#new-status-form{
+    background-color: #f7f7f7;
+    padding: 30px 20px 20px 20px;
+    margin-bottom: 30px;
+}
