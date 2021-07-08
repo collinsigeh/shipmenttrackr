@@ -12,11 +12,27 @@
 
                 <div class="card-body">
                     
-                    <div class="text-right mb-3">
-                        <button id="status-form-button" class="btn btn-primary">New status</button>
+                    <div id="status-form-button" class="text-right mb-3">
+                        <button class="btn btn-primary" onclick="showStatusCreationForm()">New status</button>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     <div id="new-status-form">
+                        <div class="text-right">
+                            <a href="" id="close-new-status-form" onclick="hideStatusCreationForm()">Close</a>
+                        </div>
                         <form action="{{ route('status.store') }}" method="post">
                             @csrf
 
@@ -56,16 +72,19 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-                                    <td>In Transit</td>
-                                    <td><a href="" class="my-table-link-delete">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-                                    <td>Delivered</td>
-                                    <td><a href="" class="my-table-link-delete">Delete</a></td>
-                                </tr>
+                                @forelse ($statuses as $status)
+                                    <tr>
+                                        <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+                                        <td>{{ $status->name }}</td>
+                                        <td><a href="" class="my-table-link-delete">Delete</a></td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td></td>
+                                        <td><em>None available</em></td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

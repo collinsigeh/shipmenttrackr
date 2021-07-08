@@ -15,7 +15,9 @@ class StatusController extends Controller
      */
     public function index()
     {
-        return view('settings.status.index');
+        $statuses = Status::orderBy('name', 'asc')->get();
+
+        return view('settings.status.index')->with('statuses', $statuses);
     }
 
     /**
@@ -37,7 +39,7 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:statuses',
         ]);
 
         Status::create([

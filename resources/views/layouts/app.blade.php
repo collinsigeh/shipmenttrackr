@@ -88,9 +88,15 @@
     </div>
 
     <script>
-        document.getElementById('status-form-button').onclick(funtion(){
-            
-        });
+        function showStatusCreationForm(){
+            document.getElementById('new-status-form').style.display = 'block';
+            document.getElementById('status-form-button').style.display = 'none';
+        }
+        
+        function hideStatusCreationForm(){
+            document.getElementById('status-form-button').style.display = 'block';
+            document.getElementById('new-status-form').style.display = 'none';
+        }
     </script>
 </body>
 </html>
