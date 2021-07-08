@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ModeController;
 
 /*
 |--------------------------------------------------------------------------
