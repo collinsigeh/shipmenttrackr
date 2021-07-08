@@ -1,0 +1,17 @@
+.my-table-link{
+    color: #333;
+}
+
+.my-table-link:hover{
+    color: #333;
+    font-style: italic;
+}
+
+.my-table-link-view{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.my-table-link-view:hover{
+    font-style: italic;
+}
