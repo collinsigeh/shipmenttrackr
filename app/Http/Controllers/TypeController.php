@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Status;
+use App\Models\Type;
 
-class StatusController extends Controller
+class TypeController extends Controller
 {
     public function __construct(){
 
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +20,9 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $statuses = Status::orderBy('name', 'asc')->get();
+        $types = Type::orderBy('name', 'asc')->get();
 
-        return view('settings.status.index')->with('statuses', $statuses);
+        return view('settings.types.index')->with('types', $types);
     }
 
     /**
@@ -47,7 +47,7 @@ class StatusController extends Controller
             'name' => 'required|string|max:255|unique:statuses',
         ]);
 
-        Status::create([
+        Type::create([
             'name' => $request->name
         ]);
 

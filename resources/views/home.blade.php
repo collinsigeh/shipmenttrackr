@@ -78,6 +78,7 @@
                     
                     <a href="" class="btn btn-sm btn-block btn-outline-primary text-left">My account &rarr;</a>
                     <a href="{{ route('status.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Shipment status &rarr;</a>
+                    <a href="{{ route('type.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Shipment types &rarr;</a>
 
                 </div>
             </div>

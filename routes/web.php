@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ShipmentController;
 
 /*
@@ -26,6 +27,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('settings/status', StatusController::class);
+
+Route::resource('settings/type', TypeController::class);
+
 Route::resource('shipments', ShipmentController::class);
 Route::post('shipments/existingsender', [ShipmentController::class, 'existingsender'])->name('shipments.existingsender');
 Route::post('shipments/newsender', [ShipmentController::class, 'newsender'])->name('shipments.newsender');
