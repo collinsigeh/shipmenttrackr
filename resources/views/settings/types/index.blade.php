@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="mb-4">
-        <h3>Shipment types</h3>
+        <h3>Shipment type settings</h3>
     </div>
     <div class="row">
         <div class="col-md-8 mb-4">
@@ -30,6 +30,10 @@
                     @endif
 
                     <div id="new-status-form">
+                        <div class="my-form-title">
+                            New shipment type
+                        </div>
+
                         <div class="text-right">
                             <a href="" id="close-new-status-form" onclick="hideStatusCreationForm()">Close</a>
                         </div>

@@ -3,12 +3,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="mb-4">
-        <h3>Shipment status setting</h3>
+        <h3>Order status settings</h3>
     </div>
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">
-                <div class="card-header">{{ __('Shipments') }}</div>
+                <div class="card-header">{{ __('Order statuses') }}</div>
 
                 <div class="card-body">
                     
@@ -30,6 +30,10 @@
                     @endif
 
                     <div id="new-status-form">
+                        <div class="my-form-title">
+                            New order status
+                        </div>
+
                         <div class="text-right">
                             <a href="" id="close-new-status-form" onclick="hideStatusCreationForm()">Close</a>
                         </div>
@@ -99,9 +103,9 @@
 
                 <div class="card-body">
                     
-                    <p>The <strong>shipment status</strong> is a settings parameter which is used to determine the state of each shipment.</p>
-                    <p>At least one (1) <em>shipment status</em> is required before shipments can be entered.</p>
-                    <p>You can create new <em>shipment status</em> by clicking on the <strong>New status</strong> button.</p>
+                    <p>The <strong>order status</strong> is a settings parameter which is used to determine the state of each shipment.</p>
+                    <p>At least one (1) <em>order status</em> is required before shipments can be entered.</p>
+                    <p>You can create new <em>order status</em> by clicking on the <strong>New status</strong> button.</p>
 
                 </div>
             </div>
