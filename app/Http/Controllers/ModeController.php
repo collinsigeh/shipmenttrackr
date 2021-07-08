@@ -44,7 +44,7 @@ class ModeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255|unique:statuses',
+            'name' => 'required|string|max:255|unique:modes',
         ]);
 
         Mode::create([
