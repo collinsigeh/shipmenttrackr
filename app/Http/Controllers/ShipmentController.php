@@ -4,15 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Status;
-
-class StatusController extends Controller
+class ShipmentController extends Controller
 {
-    public function __construct(){
-
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +13,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $statuses = Status::orderBy('name', 'asc')->get();
-
-        return view('settings.status.index')->with('statuses', $statuses);
+        //
     }
 
     /**
@@ -32,7 +23,20 @@ class StatusController extends Controller
      */
     public function create()
     {
-        return redirect()->route('status.store');
+        return view('shipments.create');
+    }
+
+    /**
+     * Step one (1) of creating New shipment
+     *  -1- check for and save shipper details.
+     *  -2- create order in db.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function newshipment(Request $request)
+    {
+        dd($request->sender_type);
     }
 
     /**
@@ -43,15 +47,7 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:statuses',
-        ]);
-
-        Status::create([
-            'name' => $request->name
-        ]);
-
-        return back();
+        //
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('settings/status', StatusController::class);
+Route::resource('shipments', ShipmentController::class);
+Route::post('shipments/newshipment', [ShipmentController::class, 'newshipment'])->name('shipments.newshipment');

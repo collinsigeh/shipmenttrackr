@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="mb-3">
+    <div class="mb-4">
         <h3>Shipment status setting</h3>
     </div>
     <div class="row">

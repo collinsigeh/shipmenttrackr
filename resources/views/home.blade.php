@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="mb-3">
+    <div class="mb-4">
         <h3>Dashboard</h3>
     </div>
     <div class="row">
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     
                     <div class="text-right mb-3">
-                        <a href="" class="btn btn-primary">New shipment</a>
+                        <a href="{{ route('shipments.create') }}" class="btn btn-primary">New shipment</a>
                     </div>
 
                     <div class="table-responsive">
@@ -21,9 +21,9 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Tracking code</th>
-                                    <th>Sender</th>
-                                    <th>Receiver</th>
+                                    <th>Tracking Code</th>
+                                    <th>Sender Name</th>
+                                    <th>Receiver Name</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -32,18 +32,34 @@
                             <tbody>
                                 <tr>
                                     <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-                                    <td><a href="" class="my-table-link"><strong>DGG1</strong></a></td>
+                                    <td><a href="" class="my-table-link"><strong>DGG-1</strong></a></td>
                                     <td>Seimens International</td>
                                     <td>MTN Nigeria</td>
-                                    <td><span class="badge badge-info">In transit</span></td>
+                                    <td><span class="badge badge-primary">In transit</span></td>
                                     <td><a href="" class="my-table-link-view">View</a></td>
                                 </tr>
                                 <tr>
                                     <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-                                    <td><a href="" class="my-table-link"><strong>DGG2</strong></a></td>
+                                    <td><a href="" class="my-table-link"><strong>DGG-2</strong></a></td>
                                     <td>Okezie Electronics</td>
                                     <td>Okezie Electronics</td>
-                                    <td><span class="badge badge-info">In transit</span></td>
+                                    <td><span class="badge badge-danger">Canceled</span></td>
+                                    <td><a href="" class="my-table-link-view">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+                                    <td><a href="" class="my-table-link"><strong>DGG-4</strong></a></td>
+                                    <td>Okezie Electronics</td>
+                                    <td>Okezie Electronics</td>
+                                    <td><span class="badge badge-warning">On Hold</span></td>
+                                    <td><a href="" class="my-table-link-view">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+                                    <td><a href="" class="my-table-link"><strong>DGG-22</strong></a></td>
+                                    <td>Okezie Electronics</td>
+                                    <td>Okezie Electronics</td>
+                                    <td><span class="badge badge-success">Delivered</span></td>
                                     <td><a href="" class="my-table-link-view">View</a></td>
                                 </tr>
                             </tbody>
