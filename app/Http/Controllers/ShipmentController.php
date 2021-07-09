@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Models\Sender;
 use App\Models\Receiver;
+use App\Models\Status;
+use App\Models\Type;
+use App\Models\Mode;
 
 class ShipmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +34,11 @@ class ShipmentController extends Controller
      */
     public function create()
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+
         $senders = Sender::orderBy('name', 'asc')->get();
 
         return view('shipments.create')->with('senders', $senders);
@@ -41,6 +54,11 @@ class ShipmentController extends Controller
      */
     public function existingsender(Request $request)
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete....');
+        }
+
         $this->validate($request, [
             'select_sender' => 'required|min:1'
         ]);
@@ -65,6 +83,11 @@ class ShipmentController extends Controller
      */
     public function newsender(Request $request)
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+
         $this->validate($request, [
             'name' => 'required|max:255|unique:senders',
             'email' => 'required|max:255|email'
@@ -88,6 +111,11 @@ class ShipmentController extends Controller
      */
     public function create_step2(Sender $sender)
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+
         $receivers = Receiver::orderBy('name', 'asc')->get();
 
         return view('shipments.create_step2')->with([
@@ -106,6 +134,11 @@ class ShipmentController extends Controller
      */
     public function existingreceiver(Request $request)
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+
         $this->validate($request, [
             'sender_id' => 'required|min:1',
             'select_receiver' => 'required|min:1'
@@ -139,6 +172,11 @@ class ShipmentController extends Controller
      */
     public function newreceiver(Request $request)
     {
+
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+
         $this->validate($request, [
             'sender_id' => 'required|min:1',
             'name' => 'required|max:255|unique:receivers',
@@ -173,9 +211,20 @@ class ShipmentController extends Controller
     public function create_step3(Sender $sender, Receiver $receiver)
     {
 
+        if(!$this->setupComplete()){
+            return back()->with('error_status', 'Your setup is NOT complete.');
+        }
+        
+        $statuses = Status::orderBy('name', 'asc')->get();
+        $types = Type::orderBy('name', 'asc')->get();
+        $modes = Mode::orderBy('name', 'asc')->get();
+
         return view('shipments.create_step3')->with([
                 'sender' => $sender,
-                'receiver' => $receiver
+                'receiver' => $receiver,
+                'statuses' => $statuses,
+                'types' => $types,
+                'modes' => $modes
             ]);
     }
 
@@ -233,5 +282,15 @@ class ShipmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function setupComplete()
+    {
+        if(Status::count() < 1 OR Type::count() < 1 OR Mode::count() < 1)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

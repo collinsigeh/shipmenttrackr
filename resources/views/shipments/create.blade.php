@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">
-                <div class="card-header">{{ __('Step 1 of 4 - Add sender details') }}</div>
+                <div class="card-header"><span class="badge badge-primary">Step 1 of 4</span> - Add sender details</div>
 
                 <div class="card-body">
 

@@ -11,6 +11,16 @@
                 <div class="card-header">{{ __('Shipments') }}</div>
 
                 <div class="card-body">
+
+                    @if (session('error_status'))
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            {{ session('error_status') }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     
                     <div class="text-right mb-3">
                         <a href="{{ route('shipments.create') }}" class="btn btn-primary">New shipment</a>
