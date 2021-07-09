@@ -9,6 +9,7 @@ use App\Models\Receiver;
 use App\Models\Status;
 use App\Models\Type;
 use App\Models\Mode;
+use App\Models\Shipment;
 
 class ShipmentController extends Controller
 {
@@ -55,10 +56,6 @@ class ShipmentController extends Controller
     public function existingsender(Request $request)
     {
 
-        if(!$this->setupComplete()){
-            return back()->with('error_status', 'Your setup is NOT complete....');
-        }
-
         $this->validate($request, [
             'select_sender' => 'required|min:1'
         ]);
@@ -83,10 +80,6 @@ class ShipmentController extends Controller
      */
     public function newsender(Request $request)
     {
-
-        if(!$this->setupComplete()){
-            return back()->with('error_status', 'Your setup is NOT complete.');
-        }
 
         $this->validate($request, [
             'name' => 'required|max:255|unique:senders',
@@ -135,10 +128,6 @@ class ShipmentController extends Controller
     public function existingreceiver(Request $request)
     {
 
-        if(!$this->setupComplete()){
-            return back()->with('error_status', 'Your setup is NOT complete.');
-        }
-
         $this->validate($request, [
             'sender_id' => 'required|min:1',
             'select_receiver' => 'required|min:1'
@@ -172,10 +161,6 @@ class ShipmentController extends Controller
      */
     public function newreceiver(Request $request)
     {
-
-        if(!$this->setupComplete()){
-            return back()->with('error_status', 'Your setup is NOT complete.');
-        }
 
         $this->validate($request, [
             'sender_id' => 'required|min:1',
@@ -236,7 +221,34 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+
+            'type' => 'required',
+            'mode' => 'required',
+            'origin' => 'required|max:255',
+            'destination' => 'required|max:255',
+            'status' => 'required',
+        ]);
+
+        $tracking_code = 'DGG-10' . Shipment::count();
+
+        $shipment = auth()->user()->shipments()->create([
+
+                            'tracking_code' => $tracking_code,
+                            'sender_id' => $request->sender_id,
+                            'receiver_id' => $request->receiver_id,
+                            'status_id' => $request->status,
+                            'type_id' => $request->type,
+                            'mode_id' => $request->mode,
+                            'origin' => $request->origin,
+                            'destination' => $request->destination,
+                            'pickedup_date' => $request->pickedup_date,
+                            'expected_delivery_date' => $request->expected_delivery_date,
+                            'actual_delivery_date' => $request->actual_delivery_date,
+                            'comments' => $request->comments
+                        ]);
+
+        return redirect()->route('packages.add', $shipment);
     }
 
     /**
