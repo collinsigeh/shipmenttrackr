@@ -1,3 +1,7 @@
+.my-default-link:hover{
+    font-style: italic;
+}
+
 .my-table-link{
     color: #333;
 }
@@ -37,10 +41,18 @@
     padding: 0 20px 20px 20px;
 }
 
-#new-shipment-step1, #new-shipment-step-option2
+#new-shipment-step1
 {
     background-color: #f7f7f7;
 }
+
+#new-shipment-step-option2
+{
+    background-color: #f7f7f7;
+    margin-bottom: 30px;
+}
+
+
 
 #new-shipment-step1 form, #new-shipment-step-option2 form
 {

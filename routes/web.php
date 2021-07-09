@@ -36,3 +36,7 @@ Route::resource('settings/mode', ModeController::class);
 Route::resource('shipments', ShipmentController::class);
 Route::post('shipments/existingsender', [ShipmentController::class, 'existingsender'])->name('shipments.existingsender');
 Route::post('shipments/newsender', [ShipmentController::class, 'newsender'])->name('shipments.newsender');
+Route::get('shipments/{sender}/create_step2', [ShipmentController::class, 'create_step2'])->name('shipments.create_step2');
+Route::post('shipments/existingreceiver', [ShipmentController::class, 'existingreceiver'])->name('shipments.existingreceiver');
+Route::post('shipments/newreceiver', [ShipmentController::class, 'newreceiver'])->name('shipments.newreceiver');
+Route::get('shipments/{sender}/{receiver}/create_step3', [ShipmentController::class, 'create_step3'])->name('shipments.create_step3');

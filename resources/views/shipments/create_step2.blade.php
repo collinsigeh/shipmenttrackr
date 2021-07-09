@@ -9,7 +9,12 @@
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">
-                <div class="card-header">{{ __('Step 1 of 4 - Add sender details') }}</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">{{ __('Step 2 of 4 - Add sender details') }}</div>
+                        <div class="col-4 text-right"><a href="" class="my-default-link">&larr; Step 1</a></div>
+                    </div>
+                </div>
 
                 <div class="card-body">
 
@@ -41,25 +46,27 @@
                         <div class="col-lg-6">
                             <div id="new-shipment-step-option2">
                                 <div class="my-form-title">
-                                    Existing sender
+                                    Existing receiver
                                 </div>
 
-                                <form action="{{ route('shipments.existingsender') }}" method="post">
+                                <form action="{{ route('shipments.existingreceiver') }}" method="post">
                                     @csrf
+
+                                    <input type="hidden" name="sender_id" value="{{ $sender->id }}">
         
                                     <div class="form-group row">
-                                        <label for="select_sender" class="col-md-4 col-form-label text-md-right">{{ __('Select a sender') }}</label>
+                                        <label for="select_receiver" class="col-md-4 col-form-label text-md-right">{{ __('Select a receiver') }}</label>
             
                                         <div class="col-md-8">
-                                            <select id="select_sender" class="form-control @error('select_sender') is-invalid @enderror" name="select_sender" required autocomplete="select_sender" autofocus>
+                                            <select id="select_receiver" class="form-control @error('select_receiver') is-invalid @enderror" name="select_receiver" required autocomplete="select_receiver" autofocus>
                                                 <option value="">- - -</option>
-                                                @foreach ($senders as $sender)
-                                                    <option value="{{ $sender->id }}">{{ $sender->name }}</option>
+                                                @foreach ($receivers as $receiver)
+                                                    <option value="{{ $receiver->id }}">{{ $receiver->name }}</option>
                                                 @endforeach
                                             </select>
                                             <small class="text-muted">** Required **</small>
         
-                                            @error('select_sender')
+                                            @error('select_receiver')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -82,14 +89,16 @@
                         <div class="col-lg-6">
                             <div id="new-shipment-step1">
                                 <div class="my-form-title">
-                                    New sender
+                                    New receiver
                                 </div>
                                 
-                                <form action="{{ route('shipments.newsender') }}" method="post">
+                                <form action="{{ route('shipments.newreceiver') }}" method="post">
                                     @csrf
+
+                                    <input type="hidden" name="sender_id" value="{{ $sender->id }}">
         
                                     <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Sender name') }}</label>
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Receiver name') }}</label>
             
                                         <div class="col-md-8">
                                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -169,8 +178,8 @@
                 <div class="card-header">{{ __('Hint') }}</div>
 
                 <div class="card-body">
-                    <p>If the sender record is in your system, select using the "<strong>Existing sender</strong>" form.</p>
-                    <p>If the sender record is NOT in your system, enter it using the "<strong>New sender</strong>" form.</p>
+                    <p>If the receiver record is in your system, select using the "<strong>Existing receiver</strong>" form.</p>
+                    <p>If the receiver record is NOT in your system, enter it using the "<strong>New receiver</strong>" form.</p>
 
                 </div>
             </div>
