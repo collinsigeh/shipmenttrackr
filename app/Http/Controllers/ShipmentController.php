@@ -248,7 +248,7 @@ class ShipmentController extends Controller
                             'comments' => $request->comments
                         ]);
 
-        return redirect()->route('packages.add', $shipment);
+        return redirect()->route('shipments.show', $shipment);
     }
 
     /**
@@ -257,9 +257,9 @@ class ShipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Shipment $shipment)
     {
-        //
+        dd($shipment);
     }
 
     /**

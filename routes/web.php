@@ -43,3 +43,4 @@ Route::get('shipments/{sender}/create_step2', [ShipmentController::class, 'creat
 Route::post('shipments/existingreceiver', [ShipmentController::class, 'existingreceiver'])->name('shipments.existingreceiver');
 Route::post('shipments/newreceiver', [ShipmentController::class, 'newreceiver'])->name('shipments.newreceiver');
 Route::get('shipments/{sender}/{receiver}/create_step3', [ShipmentController::class, 'create_step3'])->name('shipments.create_step3');
+Route::get('shipments/{shipment:tracking_code}', [ShipmentController::class, 'show'])->name('shipments.show');
