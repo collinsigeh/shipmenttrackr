@@ -13,7 +13,7 @@ class Item extends Model
         'shipment_id',
         'quantity_type_id',
         'quantity_number',
-        'description',
+        'name',
         'value',
         'currency',
         'weight',

@@ -269,9 +269,57 @@ class ShipmentController extends Controller
         ]);
     }
 
-    public function store_cargo_item(Request $request, $id)
+    public function store_cargo_item(Request $request, Shipment $shipment)
     {
-        //
+        
+        $this->validate($request, [
+            'quantity' => 'required|integer|min:1',
+            'quantity_type' => 'required|integer|min:1',
+            'item_name' => 'required|max:255',
+            'value_amount' => 'required|numeric|min:0',
+            'value_currency' => 'required',
+            'weight' => 'required'
+        ]);
+
+        if($request->length)
+        {
+            $this->validate($request, ['length' => 'numeric']);
+        }
+
+        if($request->width)
+        {
+            $this->validate($request, ['width' => 'numeric']);
+        }
+
+        if($request->height)
+        {
+            $this->validate($request, ['height' => 'numeric']);
+        }
+
+        if($request->special_note)
+        {
+            $this->validate($request, ['special_note' => 'string|max:255']);
+        }
+
+        if(!QuantityType::find($request->quantity_type))
+        {
+            return back()->with('error_status', 'Invalid quatity type selected.');
+        }
+
+        auth()->user()->items()->create([
+                'shipment_id' => $shipment->id,
+                'quantity_type_id' => $request->quantity_type,
+                'quantity_number' => $request->quantity,
+                'name' => $request->item_name,
+                'value' => $request->value_amount,
+                'currency' => $request->value_currency,
+                'weight' => $request->weight,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height,
+            ]);
+
+        return redirect()->route('shipments.show', $shipment);
     }
 
     /**
@@ -282,7 +330,7 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        //
+        dd($shipment);
     }
 
     /**
