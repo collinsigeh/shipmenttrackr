@@ -19,6 +19,16 @@
 
                 <div class="card-body">
 
+                    @if (session('success_status'))
+                        <div class="alert alert-success alert-dismissible fade show">
+                            {{ session('success_status') }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     @if (session('error_status'))
                         <div class="alert alert-danger alert-dismissible fade show">
                             {{ session('error_status') }}
@@ -176,22 +186,59 @@
                                         <tr>
                                             <th></th>
                                             <th>Item description</th>
-                                            <th>Volume</th>
-                                            <th>Weight</th>
-                                            <th>Value</th>
+                                            <th class="text-right">Value</th>
                                             <th></th>
                                         </tr>
                                     </thead>
         
                                     <tbody>
-                                        <tr>
-                                            <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-                                            <td><a href="" class="my-table-link"><strong>DGG-1</strong></a></td>
-                                            <td>Seimens International</td>
-                                            <td>MTN Nigeria</td>
-                                            <td><span class="badge badge-primary">In transit</span></td>
-                                            <td><a href="" class="my-table-link-view">View</a></td>
-                                        </tr>
+                                        @foreach ($shipment->items as $item)
+                                            <tr>
+                                                <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+
+                                                <td>
+                                                    <strong>
+                                                        {{ 
+                                                            $item->quantity_number . ' ' 
+                                                                . Str::plural($item->quantityType->name, $item->quantity_number) 
+                                                                . ' of ' . $item->name 
+                                                        }}
+                                                    </strong><br>
+
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <small class="text-muted">
+
+                                                                <em>Vol:</em>
+
+                                                                @if ($item->length > 0 && $item->width > 0 && $item->height > 0)
+                                                                    
+                                                                    {{ $item->length * $item->width * $item->height }} cm<sup><small>3</small></sup>
+                                                                @else
+                                                                    
+                                                                    {{ '--' }}
+                                                                @endif
+
+                                                            </small>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <small class="text-muted"><em>Wgt:</em> 4000kg</small>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            @if ($item->special_note)
+                                                                <small class="text-muted">{{ $item->special_note }}</small>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="text-right">{{ $item->currency . ' ' . $item->value }}</td>
+
+                                                <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -201,7 +248,7 @@
                             </div>
                         @endif
 
-                        <div class="text-right">
+                        <div class="text-right" style="margin: 20px;">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 New Item
                             </button>

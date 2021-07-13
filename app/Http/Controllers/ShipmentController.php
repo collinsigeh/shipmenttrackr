@@ -278,7 +278,7 @@ class ShipmentController extends Controller
             'item_name' => 'required|max:255',
             'value_amount' => 'required|numeric|min:0',
             'value_currency' => 'required',
-            'weight' => 'required'
+            'weight' => 'required|numeric'
         ]);
 
         if($request->length)
@@ -317,9 +317,10 @@ class ShipmentController extends Controller
                 'length' => $request->length,
                 'width' => $request->width,
                 'height' => $request->height,
+                'special_note' => $request->special_note
             ]);
 
-        return redirect()->route('shipments.show', $shipment);
+        return redirect()->back()->with('success_status', 'The item has been added successfully.');
     }
 
     /**

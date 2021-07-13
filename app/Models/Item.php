@@ -19,7 +19,8 @@ class Item extends Model
         'weight',
         'length',
         'width',
-        'height'
+        'height',
+        'special_note'
     ];
 
     public function user(){
@@ -34,7 +35,7 @@ class Item extends Model
 
     public function quantityType(){
 
-        return $this->belongsTo(quantityType::class);
+        return $this->belongsTo(QuantityType::class);
     }
     
 }
