@@ -168,7 +168,11 @@
                             Cargo items
                         </div>
                         
-
+                        @forelse ($shipment->items as $item)
+                            {{ 'here an item' }}
+                        @empty
+                            {{ 'no item' }}
+                        @endforelse
                     </div>
 
                 </div>

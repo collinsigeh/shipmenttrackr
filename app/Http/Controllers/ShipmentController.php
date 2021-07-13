@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\Type;
 use App\Models\Mode;
 use App\Models\Shipment;
+use App\Models\Item;
 
 class ShipmentController extends Controller
 {
@@ -259,6 +260,7 @@ class ShipmentController extends Controller
 
     public function create_step4(Shipment $shipment)
     {
+        
         return view('shipments.create_step4')->with('shipment', $shipment);
     }
 
