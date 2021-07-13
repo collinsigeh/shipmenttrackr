@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class QuantityType extends Model
 {
     use HasFactory;
 
@@ -13,10 +13,8 @@ class Status extends Model
         'name',
     ];
 
-    public $timestamps = false;
+    public function items(){
 
-    public function shipments(){
-
-        return $this->hasMany(Shipment::class);
+        return $this->hasMany(Item::class);
     }
 }

@@ -12,4 +12,9 @@ class Type extends Model
     public $fillable = [
         'name',
     ];
+
+    public function shipments(){
+
+        return $this->hasMany(Shipment::class);
+    }
 }

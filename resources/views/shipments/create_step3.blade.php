@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-8"><span class="badge badge-primary">Step 3 of 4</span> - Add shipment details</div>
+                        <div class="col-8"><span class="badge badge-primary">Step 3 of 4</span> - Add shipping details</div>
 
                         <div class="col-4 text-right"><a href="{{ route('shipments.create_step2', $sender) }}" class="my-default-link">&larr; Step 2</a></div>
                     </div>
@@ -749,7 +749,7 @@
                 <div class="card-header">{{ __('Hint') }}</div>
 
                 <div class="card-body">
-                    <p>In the next step - "<strong>Step 4 of 4</strong>", you will be able to add the packages for this shipment.</p>
+                    <p>In the next step - "<strong>Step 4 of 4</strong>", you will be able to add the cargo items.</p>
 
                 </div>
             </div>

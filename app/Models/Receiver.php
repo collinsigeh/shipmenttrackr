@@ -15,4 +15,9 @@ class Receiver extends Model
         'phone',
         'address',
     ];
+
+    public function shipments(){
+
+        return $this->hasMany(Shipment::class);
+    }
 }

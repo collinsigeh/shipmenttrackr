@@ -230,11 +230,11 @@ class ShipmentController extends Controller
             'status' => 'required',
         ]);
 
-        $tracking_code = 'DGG-10' . Shipment::count();
+        $temp_tracking_code = 'tmp-' . $request->sender_id . $request->receiver_id . '-'. time();
 
         $shipment = auth()->user()->shipments()->create([
 
-                            'tracking_code' => $tracking_code,
+                            'tracking_code' => $temp_tracking_code,
                             'sender_id' => $request->sender_id,
                             'receiver_id' => $request->receiver_id,
                             'status_id' => $request->status,
@@ -242,13 +242,24 @@ class ShipmentController extends Controller
                             'mode_id' => $request->mode,
                             'origin' => $request->origin,
                             'destination' => $request->destination,
-                            'pickedup_date' => $request->pickedup_date,
+                            'pickedup_date' => $request->pickup_date,
                             'expected_delivery_date' => $request->expected_delivery_date,
                             'actual_delivery_date' => $request->actual_delivery_date,
                             'comments' => $request->comments
                         ]);
+        
+        $new_tracking_code = substr($shipment->sender->name, 1, 1) . substr($shipment->receiver->name, 1, 1) . $shipment->id;
+        
+        $shipment->tracking_code = strtolower($new_tracking_code);
 
-        return redirect()->route('shipments.show', $shipment);
+        $shipment->save();
+
+        return redirect()->route('shipments.create_step4', $shipment);
+    }
+
+    public function create_step4(Shipment $shipment)
+    {
+        return view('shipments.create_step4')->with('shipment', $shipment);
     }
 
     /**
@@ -259,7 +270,7 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        dd($shipment);
+        //
     }
 
     /**

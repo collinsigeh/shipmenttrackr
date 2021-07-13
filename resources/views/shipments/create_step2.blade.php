@@ -19,6 +19,21 @@
 
                 <div class="card-body">
 
+                    <div class="my-box">
+                        <div class="my-box-title">
+                            Sender
+                        </div>
+
+                        <div class="my-box-content">
+
+                            <span class="main-info">{{ $sender->name }}</span><br>
+                            {{ $sender->email }}<br>
+                            {{ $sender->phone }}<br>
+                            {{ $sender->address }}
+
+                        </div>
+                    </div>
+
                     @if (session('error_status'))
                         <div class="alert alert-danger alert-dismissible fade show">
                             {{ session('error_status') }}
