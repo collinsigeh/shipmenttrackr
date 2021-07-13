@@ -260,8 +260,13 @@ class ShipmentController extends Controller
 
     public function create_step4(Shipment $shipment)
     {
-        
+
         return view('shipments.create_step4')->with('shipment', $shipment);
+    }
+
+    public function store_cargo_item(Request $request, $id)
+    {
+        //
     }
 
     /**

@@ -44,4 +44,5 @@ Route::post('shipments/existingreceiver', [ShipmentController::class, 'existingr
 Route::post('shipments/newreceiver', [ShipmentController::class, 'newreceiver'])->name('shipments.newreceiver');
 Route::get('shipments/{sender}/{receiver}/create_step3', [ShipmentController::class, 'create_step3'])->name('shipments.create_step3');
 Route::get('shipments/{shipment:tracking_code}/create_step4', [ShipmentController::class, 'create_step4'])->name('shipments.create_step4');
+Route::post('shipments/{id}/store_cargo_item', [ShipmentController::class, 'store_cargo_item'])->name('shipments.store_cargo_item');
 Route::get('shipments/{shipment:tracking_code}/', [ShipmentController::class, 'show'])->name('shipments.show');

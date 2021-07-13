@@ -168,11 +168,44 @@
                             Cargo items
                         </div>
                         
-                        @forelse ($shipment->items as $item)
-                            {{ 'here an item' }}
-                        @empty
-                            {{ 'no item' }}
-                        @endforelse
+                        @if ($shipment->items->count())
+
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Item description</th>
+                                            <th>Volume</th>
+                                            <th>Weight</th>
+                                            <th>Value</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+        
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+                                            <td><a href="" class="my-table-link"><strong>DGG-1</strong></a></td>
+                                            <td>Seimens International</td>
+                                            <td>MTN Nigeria</td>
+                                            <td><span class="badge badge-primary">In transit</span></td>
+                                            <td><a href="" class="my-table-link-view">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <div class="alert alert-info">
+                                No cargo item added.
+                            </div>
+                        @endif
+
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                New Item
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -204,4 +237,7 @@
         </div>
     </div>
 </div>
+
+@include('modals.add_cargo_item')
+
 @endsection
