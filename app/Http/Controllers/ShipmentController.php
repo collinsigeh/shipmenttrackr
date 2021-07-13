@@ -261,8 +261,12 @@ class ShipmentController extends Controller
 
     public function create_step4(Shipment $shipment)
     {
+        $quantity_types = QuantityType::orderBy('name', 'asc')->get();
 
-        return view('shipments.create_step4')->with('shipment', $shipment);
+        return view('shipments.create_step4')->with([
+            'shipment' => $shipment,
+            'quantity_types' => $quantity_types
+        ]);
     }
 
     public function store_cargo_item(Request $request, $id)

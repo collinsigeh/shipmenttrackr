@@ -8,17 +8,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <form action="{{ route('shipments.store_cargo_item', $shipment->id) }}" method="post">
+                @csrf
 
-            <div class="modal-body">
-                <form action="{{ route('shipments.store_cargo_item', $shipment->id) }}" method="post">
-                    @csrf
-
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-xl-4">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quanity') }}</label>
+                                        <label for="quantity" class="form-label">{{ __('Quanity') }}</label>
 
                                         <input type="number" name="quantiy" id="quantity" required class="form-control @error('quantity')
                                                 is-invalid
@@ -31,11 +30,52 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="quantity_type" class="col-md-4 col-form-label text-md-right">{{ __('Quanity Type') }}</label>
+                                        <label for="quantity_type" class="form-label">{{ __('Quanity Type') }}</label>
+
+                                        <select name="quantiy_type" id="quantity_type" required class="form-control @error('quantity_type')
+                                                    is-invalid
+                                                @enderror">
+
+                                            @foreach ($quantity_types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                            
+                                        @error('quantity_type')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="quantity" class="form-label">{{ __('Weight (kg)') }}</label>
+
+                                        <input type="text" name="quantiy" id="quantity" required class="form-control @error('quantity')
+                                                is-invalid
+                                            @enderror" value="{{ old('quantity') }}">
+                                            
+                                        @error('quantity')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="quantity_type" class="form-label">{{ __('Quanity Type') }}</label>
 
                                         <select name="quantiy_type" id="quantity_type" required class="form-control @error('quantity_type')
                                                 is-invalid
@@ -55,13 +95,13 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save item</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save item</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -19,13 +19,14 @@ class CreateItemsTable extends Migration
             $table->foreignId('shipment_id')->constrained()->onDelete('cascade');
             $table->foreignId('quantity_type_id')->constrained()->onDelete('cascade');
             $table->integer('quantity_number');
-            $table->string('description');
+            $table->string('name');
             $table->decimal('value', 10,2);
             $table->string('currency');
             $table->decimal('weight', 10,2);
             $table->decimal('length', 10, 2)->nullable();
             $table->decimal('width', 10, 2)->nullable();
             $table->decimal('height', 10, 2)->nullable();
+            $table->string('special_note')->nullable();
             $table->timestamps();
         });
     }
