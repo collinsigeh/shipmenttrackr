@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\Type;
 use App\Models\Mode;
 use App\Models\Shipment;
+use App\Models\QuantityType;
 use App\Models\Item;
 
 class ShipmentController extends Controller
@@ -316,7 +317,7 @@ class ShipmentController extends Controller
 
     public function setupComplete()
     {
-        if(Status::count() < 1 OR Type::count() < 1 OR Mode::count() < 1)
+        if(Status::count() < 1 OR Type::count() < 1 OR Mode::count() < 1 OR QuantityType::count() < 1)
         {
             return false;
         }

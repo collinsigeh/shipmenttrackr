@@ -7,6 +7,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ModeController;
+use App\Http\Controllers\QuantityTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::resource('settings/status', StatusController::class);
 Route::resource('settings/type', TypeController::class);
 
 Route::resource('settings/mode', ModeController::class);
+
+Route::resource('settings/quantity_types', QuantityTypeController::class);
 
 Route::resource('shipments', ShipmentController::class);
 Route::post('shipments/existingsender', [ShipmentController::class, 'existingsender'])->name('shipments.existingsender');
