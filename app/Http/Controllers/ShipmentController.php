@@ -250,13 +250,13 @@ class ShipmentController extends Controller
                             'comments' => $request->comments
                         ]);
         
-        $new_tracking_code = substr($shipment->sender->name, 1, 1) . substr($shipment->receiver->name, 1, 1) . $shipment->id;
+        $new_tracking_code = 'dgg-' . $request->sender_id . $request->receiver_id . '-' . $shipment->id;
         
         $shipment->tracking_code = strtolower($new_tracking_code);
 
         $shipment->save();
 
-        return redirect()->route('shipments.create_step4', $shipment);
+        return redirect()->route('shipments.create_step4', $shipment)->with('success_status', 'Shipment created! Start adding cargo items.');
     }
 
     public function create_step4(Shipment $shipment)
@@ -325,6 +325,18 @@ class ShipmentController extends Controller
             ]);
 
         return redirect()->back()->with('success_status', 'The item has been added successfully.');
+    }
+
+    /**
+     * Update check for cargo items and complete shipment by update the stage to 5.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Model $shipment
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmation(Request $request, Shipment $id)
+    {
+        dd('I got here');
     }
 
     /**

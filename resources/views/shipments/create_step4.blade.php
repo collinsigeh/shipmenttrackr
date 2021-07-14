@@ -340,9 +340,15 @@
                             @endif
     
                             <div class="text-right">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newItem">
                                     New Item
                                 </button>
+                                
+                                @if ($shipment->items->count())
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmShipment">
+                                        Confirm shipment
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -359,7 +365,7 @@
                     <p>Use the "<strong>New item</strong>" button to add cargo items at this shipment.</p>
 
                     <p>Once all cargo items have been added. 
-                        Click on the "<strong>Shipment creation completed</strong>" button to start tracking this shipment.
+                        Click on the "<strong>Confirm shipment</strong>" button to start tracking this shipment.
                     </p>
                     
                     <!--
@@ -378,5 +384,6 @@
 </div>
 
 @include('modals.add_cargo_item')
+@include('modals.confirm_shipment')
 
 @endsection
