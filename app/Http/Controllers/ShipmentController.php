@@ -334,9 +334,17 @@ class ShipmentController extends Controller
      * @param  \App\Model $shipment
      * @return \Illuminate\Http\Response
      */
-    public function confirmation(Request $request, Shipment $id)
+    public function confirmation(Request $request, Shipment $shipment)
     {
-        dd('I got here');
+        $this->validate($request, [
+            'yes_confirmation' => 'required'
+        ]);
+
+        $shipment->stage = '5';
+
+        $shipment->save();
+
+        return redirect()->route('shipments.show', $shipment);
     }
 
     /**
@@ -347,7 +355,17 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        dd($shipment);
+        if($shipment->stage <= 4)
+        {
+            return redirect()->route('shipments.create_step4', $shipment)->with('info_status', 'Please confirm the cargo items.');
+        }
+
+        $shipment_total = $this->shipmentTotal($shipment);
+
+        return view('shipments.show')->with([
+            'shipment' => $shipment,
+            'shipment_total' => $shipment_total,
+        ]);
     }
 
     /**

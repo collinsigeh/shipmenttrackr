@@ -24,7 +24,7 @@
                     <div class="my-box">
                         <div class="my-box-content">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes_confirmation" required>
+                                <input type="checkbox" class="custom-control-input" id="yes_confirmation" name="yes_confirmation" required>
                                 <label class="custom-control-label" for="yes_confirmation">Yes, all cargo items have been added.</label>
         
                                 @error('yes_confirmation')

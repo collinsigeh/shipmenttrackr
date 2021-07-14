@@ -19,6 +19,16 @@
 
                 <div class="card-body">
 
+                    @if (session('info_status'))
+                        <div class="alert alert-info alert-dismissible fade show">
+                            {{ session('info_status') }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     @if (session('success_status'))
                         <div class="alert alert-success alert-dismissible fade show">
                             {{ session('success_status') }}
@@ -227,7 +237,11 @@
                                                 </td>
     
                                                 <td>
-                                                    <small>{{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}</small>
+                                                    @if ($shipment->pickedup_date)
+                                                        <small>{{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}</small>
+                                                    @else
+                                                        --
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </table>
@@ -241,7 +255,11 @@
                                                 </td>
     
                                                 <td>
+                                                    @if ($shipment->expected_delivery_date)
                                                     <small>{{ date('d-M-Y', strtotime($shipment->expected_delivery_date)) }}</small>
+                                                    @else
+                                                        --
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </table>
@@ -255,7 +273,11 @@
                                                 </td>
     
                                                 <td>
-                                                    <small>{{ date('d-M-Y', strtotime($shipment->actual_delivery_date)) }}</small>
+                                                    @if ($shipment->actual_delivery_date)
+                                                        <small>{{ date('d-M-Y', strtotime($shipment->actual_delivery_date)) }}</small>
+                                                    @else
+                                                        --
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </table>
@@ -365,7 +387,7 @@
                     <p>Use the "<strong>New item</strong>" button to add cargo items at this shipment.</p>
 
                     <p>Once all cargo items have been added. 
-                        Click on the "<strong>Confirm shipment</strong>" button to start tracking this shipment.
+                        Click on the "<strong>Confirm shipment</strong>" to confirm that all cargo items have been added.
                     </p>
                     
                     <!--
