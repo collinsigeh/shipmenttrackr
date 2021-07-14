@@ -56,7 +56,7 @@
                     <div class="my-box">
                         <table class="table table-sm table-hover table-borderless">
                             <tr>
-                                <td style="padding: 20px 0 20px 20px; width: 115px; vertical-align: middle;" class="text-muted"><em>Tracking Code:</em></td>
+                                <td style="padding: 20px 0 20px 20px; width: 115px; vertical-align: middle;" class="text-muted">Tracking Code:</td>
 
                                 <td style="padding: 20px; 20px 20px 0;"><span class="tracking-code">{{ strtoupper($shipment->tracking_code) }}</span></td>
                             </tr>
@@ -105,70 +105,162 @@
                         </div>
                         
                         <div class="my-box-content">
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-hover">
-                                            <tr>
-                                                <td class="text-muted" style="width: 150px;"><em>Order Status</em></td>
-            
-                                                <td><span class="badge badge-pill badge-primary">{{ $shipment->status->name }}</span></td>
-                                            </tr>
-            
-                                            <tr>
-                                                <td class="text-muted"><em>Shipment Type</em></td>
-            
-                                                <td>{{ $shipment->type->name }}</td>
-                                            </tr>
-            
-                                            <tr>
-                                                <td class="text-muted"><em>Transporation Mode</em></td>
-            
-                                                <td>{{ $shipment->mode->name }}</td>
-                                            </tr>
-                                        </table>
+                            
+                            <div class="info-set">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover">
+                                                <tr>
+                                                    <td class="text-muted" style="width: 130px;"><small>Order Status</small></td>
+                
+                                                    <td><span class="badge badge-pill badge-primary">{{ $shipment->status->name }}</span></td>
+                                                </tr>
+                
+                                                <tr>
+                                                    <td class="text-muted"><small>Shipment Type</small></td>
+                
+                                                    <td>{{ $shipment->type->name }}</td>
+                                                </tr>
+                
+                                                <tr>
+                                                    <td class="text-muted"><small>Transporation Mode</small></td>
+                
+                                                    <td>{{ $shipment->mode->name }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-hover">            
-                                            <tr>
-                                                <td class="text-muted" style="width: 150px;"><em>Origin</em></td>
-            
-                                                <td>{{ $shipment->origin }}</td>
-                                            </tr>
-            
-                                            <tr>
-                                                <td class="text-muted"><em>Destination</em></td>
-            
-                                                <td>{{ $shipment->destination }}</td>
-                                            </tr>
-                                        </table>
+    
+                                    <div class="col-lg-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover">            
+                                                <tr>
+                                                    <td class="text-muted" style="width: 130px;"><small>Origin</small></td>
+                
+                                                    <td>{{ $shipment->origin }}</td>
+                                                </tr>
+                
+                                                <tr>
+                                                    <td class="text-muted"><small>Destination</small></td>
+                
+                                                    <td>{{ $shipment->destination }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-sm table-hover">
-                                    <tr>
-                                        <td>
-                                            <small class="text-muted"><em>Pickup date:</em></small> 
-                                            {{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}
-                                        </td>
-
-                                        <td>
-                                            <small class="text-muted"><em>Expected delivery:</em></small> 
-                                            {{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}
-                                        </td>
-                                        
-                                        <td>
-                                            <small class="text-muted"><em>Actual delivery:</em></small> 
-                                            {{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}
-                                        </td>
-                                    </tr>
-                                </table>
+                            
+                            <div class="info-set">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <strong>
+                                            <table class="table table-sm table-hover table-borderless">
+                                                <tr>
+                                                    <td style="width: 101px;">
+                                                        Total weight: 
+                                                    </td>
+    
+                                                    <td>
+                                                        @if ($shipment_total->weight > 0)
+                                                        
+                                                            {{ $shipment_total->weight }}  kg
+                                                        @else
+                                                            --
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </strong>
+                                    </div>
+    
+                                    <div class="col-lg-4">
+                                        <strong>
+                                            <table class="table table-sm table-hover table-borderless">
+                                                <tr>
+                                                    <td style="width: 101px;">
+                                                        Total volume: 
+                                                    </td>
+    
+                                                    <td>
+                                                        @if ($shipment_total->volume > 0)
+                                                        
+                                                            {{ $shipment_total->volume }}  cm<sup><small>3</small></sup>
+                                                        @else
+                                                            --
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </strong>
+                                    </div>
+    
+                                    <div class="col-lg-4">
+                                        <strong>       
+                                            <table class="table table-sm table-hover table-borderless">
+                                                <tr>
+                                                    <td style="width: 101px;">
+                                                        Value: 
+                                                    </td>
+    
+                                                    <td>
+                                                        @if ($shipment_total->dollar_value > 0)
+                                                            
+                                                            &dollar; {{ $shipment_total->dollar_value }} <br>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-set">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <table class="table table-sm table-hover table-borderless">
+                                            <tr>
+                                                <td style="width: 105px;">
+                                                    <small class="text-muted">Pickup date:</small>
+                                                </td>
+    
+                                                <td>
+                                                    <small>{{ date('d-M-Y', strtotime($shipment->pickedup_date)) }}</small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col-4">
+                                        <table class="table table-sm table-hover table-borderless">
+                                            <tr>
+                                                <td style="width: 105px;">
+                                                    <small class="text-muted">Expected delivery:</small>
+                                                </td>
+    
+                                                <td>
+                                                    <small>{{ date('d-M-Y', strtotime($shipment->expected_delivery_date)) }}</small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col-4">
+                                        <table class="table table-sm table-hover table-borderless">
+                                            <tr>
+                                                <td style="width: 105px;">
+                                                    <small class="text-muted">Actual delivery:</small>
+                                                </td>
+    
+                                                <td>
+                                                    <small>{{ date('d-M-Y', strtotime($shipment->actual_delivery_date)) }}</small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,80 +270,80 @@
                             Cargo items
                         </div>
                         
-                        @if ($shipment->items->count())
+                        <div class="my-box-content">
+                            @if ($shipment->items->count())
 
-                            <div class="table-responsive">
-                                <table class="table table-sm table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Item description</th>
-                                            <th class="text-right">Value</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
+                                <div class="info-set">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">                
+                                            <tbody>
+                                                @foreach ($shipment->items as $item)
+                                                    <tr>
+                                                        <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
         
-                                    <tbody>
-                                        @foreach ($shipment->items as $item)
-                                            <tr>
-                                                <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+                                                        <td style="padding-bottom: 20px;">
+                                                            <p>
+                                                                <strong>
+                                                                    {{ 
+                                                                        $item->quantity_number . ' ' 
+                                                                            . Str::plural($item->quantityType->name, $item->quantity_number) 
+                                                                            . ' of ' . $item->name 
+                                                                    }}
+                                                                </strong>
+                                                            </p>
+        
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <small class="text-muted">{{ $item->currency . ' ' . $item->value }}</small>
+                                                                </div>
+        
+                                                                <div class="col-md-3">
+                                                                    <small class="text-muted"><em>Wgt: &nbsp;</em> 4000kg</small>
+                                                                </div>
 
-                                                <td>
-                                                    <strong>
-                                                        {{ 
-                                                            $item->quantity_number . ' ' 
-                                                                . Str::plural($item->quantityType->name, $item->quantity_number) 
-                                                                . ' of ' . $item->name 
-                                                        }}
-                                                    </strong><br>
+                                                                <div class="col-md-3">
+                                                                    <small class="text-muted">
+        
+                                                                        <em>Vol: &nbsp;&nbsp;&nbsp;</em>
+        
+                                                                        @if ($item->length > 0 && $item->width > 0 && $item->height > 0)
+                                                                            
+                                                                            {{ $item->length * $item->width * $item->height }} cm<sup><small>3</small></sup>
+                                                                        @else
+                                                                            
+                                                                            {{ '--' }}
+                                                                        @endif
+        
+                                                                    </small>
+                                                                </div>
+        
+                                                                <div class="col-md-3">
+                                                                    @if ($item->special_note)
+                                                                        <small class="text-muted">{{ $item->special_note }}</small>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </td>
+        
+                                                        <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <small class="text-muted">
-
-                                                                <em>Vol:</em>
-
-                                                                @if ($item->length > 0 && $item->width > 0 && $item->height > 0)
-                                                                    
-                                                                    {{ $item->length * $item->width * $item->height }} cm<sup><small>3</small></sup>
-                                                                @else
-                                                                    
-                                                                    {{ '--' }}
-                                                                @endif
-
-                                                            </small>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <small class="text-muted"><em>Wgt:</em> 4000kg</small>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            @if ($item->special_note)
-                                                                <small class="text-muted">{{ $item->special_note }}</small>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                                <td class="text-right">{{ $item->currency . ' ' . $item->value }}</td>
-
-                                                <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            @else
+                                <div class="alert alert-info">
+                                    No cargo item added.
+                                </div>
+                            @endif
+    
+                            <div class="text-right">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    New Item
+                                </button>
                             </div>
-                        @else
-                            <div class="alert alert-info">
-                                No cargo item added.
-                            </div>
-                        @endif
-
-                        <div class="text-right" style="margin: 20px;">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                New Item
-                            </button>
                         </div>
                     </div>
 

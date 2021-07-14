@@ -261,11 +261,15 @@ class ShipmentController extends Controller
 
     public function create_step4(Shipment $shipment)
     {
+
+        $shipment_total = $this->shipmentTotal($shipment);
+
         $quantity_types = QuantityType::orderBy('name', 'asc')->get();
 
         return view('shipments.create_step4')->with([
             'shipment' => $shipment,
-            'quantity_types' => $quantity_types
+            'shipment_total' => $shipment_total,
+            'quantity_types' => $quantity_types,
         ]);
     }
 
@@ -376,5 +380,66 @@ class ShipmentController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Calculates and returns the totals of the given shipment
+     *
+     * @param  Shipment  $shipment
+     * @return Object $shipment_total
+     */
+    public function shipmentTotal(Shipment $shipment)
+    {
+        
+        $total_weight = 0;
+        $total_volume = 0;
+        $total_dollar_value = 0;
+        $total_pound_value = 0;
+        $total_euro_value = 0;
+        $total_yen_value = 0;
+        $total_naira_value = 0;
+
+        foreach($shipment->items as $item)
+        {
+            $total_weight += $item->weight;
+
+            if($item->length > 0 && $item->width > 0 && $item->height > 0)
+            {
+                $total_volume = $item->length * $item->width * $item->height;
+            }
+            
+            if($item->currency == "$")
+            {
+                $total_dollar_value += $item->value;
+            }
+            elseif($item->currency == "£")
+            {
+                $total_pound_value += $item->value;
+            }
+            elseif($item->currency == "£")
+            {
+                $total_euro_value += $item->value;
+            }
+            elseif($item->currency == "¥")
+            {
+                $total_yen_value += $item->value;
+            }
+            elseif($item->currency == "N")
+            {
+                $total_naira_value += $item->value;
+            }
+        }
+
+        $shipment_total = (object) array(
+            'weight' => $total_weight,
+            'volume' => $total_volume,
+            'dollar_value' => $total_dollar_value,
+            'pound_value' => $total_pound_value,
+            'euro_value' => $total_euro_value,
+            'yen_value' => $total_yen_value,
+            'naira_value' => $total_naira_value
+        );
+
+        return $shipment_total;
     }
 }

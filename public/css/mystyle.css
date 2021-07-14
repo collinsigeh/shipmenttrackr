@@ -94,3 +94,10 @@
 .table-borderless td, .table-borderless th{
     border: none;
 }
+
+.info-set{
+    background-color: #f9f9f9;
+    padding: 20px 20px 0 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
