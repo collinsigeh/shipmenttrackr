@@ -10,25 +10,7 @@
 
                 <div class="card-body">
 
-                    @if (session('success_status'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            {{ session('success_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if (session('error_status'))
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            {{ session('error_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    @include('messages.status_alert')
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show">
@@ -260,7 +242,7 @@
                     
                     <div id="new-shipment-step-option2">
                         <div class="my-form-title">
-                            Cargo items
+                            Shipment history
                         </div>
                         
                         <div class="my-box-content">
@@ -328,13 +310,13 @@
 
                             @else
                                 <div class="alert alert-info">
-                                    No cargo item added.
+                                    No shipment history found.
                                 </div>
                             @endif
     
                             <div class="text-right">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newItem">
-                                    New Item
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newLocation">
+                                    New location
                                 </button>
                                 
                                 @if ($shipment->items->count())
@@ -343,6 +325,78 @@
                                     </button>
                                 @endif
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div id="new-shipment-step-option2">
+                        <div class="my-form-title">
+                            Cargo items
+                        </div>
+                        
+                        <div class="my-box-content">
+                            @if ($shipment->items->count())
+
+                                <div class="info-set">
+                                    <table class="table table-sm table-hover">                
+                                        <tbody>
+                                            @foreach ($shipment->items as $item)
+                                                <tr>
+                                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
+    
+                                                    <td style="padding-bottom: 20px;">
+                                                        <p>
+                                                            <strong>
+                                                                {{ 
+                                                                    $item->quantity_number . ' ' 
+                                                                        . Str::plural($item->quantityType->name, $item->quantity_number) 
+                                                                        . ' of ' . $item->name 
+                                                                }}
+                                                            </strong>
+                                                        </p>
+    
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <small class="text-muted">{{ $item->currency . ' ' . $item->value }}</small>
+                                                            </div>
+    
+                                                            <div class="col-md-3">
+                                                                <small class="text-muted"><em>Wgt: &nbsp;</em> 4000kg</small>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <small class="text-muted">
+    
+                                                                    <em>Vol: &nbsp;&nbsp;&nbsp;</em>
+    
+                                                                    @if ($item->length > 0 && $item->width > 0 && $item->height > 0)
+                                                                        
+                                                                        {{ $item->length * $item->width * $item->height }} cm<sup><small>3</small></sup>
+                                                                    @else
+                                                                        
+                                                                        {{ '--' }}
+                                                                    @endif
+    
+                                                                </small>
+                                                            </div>
+    
+                                                            <div class="col-md-3">
+                                                                @if ($item->special_note)
+                                                                    <small class="text-muted">{{ $item->special_note }}</small>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            @else
+                                <div class="alert alert-info">
+                                    No cargo item added.
+                                </div>
+                            @endif
                         </div>
                     </div>
 

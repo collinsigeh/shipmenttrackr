@@ -34,15 +34,7 @@
                         </div>
                     </div>
 
-                    @if (session('error_status'))
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            {{ session('error_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    @include('messages.status_alert')
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show">

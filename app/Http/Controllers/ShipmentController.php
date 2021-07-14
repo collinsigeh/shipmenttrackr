@@ -261,7 +261,11 @@ class ShipmentController extends Controller
 
     public function create_step4(Shipment $shipment)
     {
-
+        if($shipment->stage > 4)
+        {
+            return redirect()->route('shipments.show', $shipment)->with('info_status', 'Shipment had previously been confirmed.');
+        }
+        
         $shipment_total = $this->shipmentTotal($shipment);
 
         $quantity_types = QuantityType::orderBy('name', 'asc')->get();
@@ -275,6 +279,10 @@ class ShipmentController extends Controller
 
     public function store_cargo_item(Request $request, Shipment $shipment)
     {
+        if($shipment->stage > 4)
+        {
+            return redirect()->route('shipments.show', $shipment)->with('info_status', 'Shipment had previously been confirmed.');
+        }
         
         $this->validate($request, [
             'quantity' => 'required|integer|min:1',
@@ -336,6 +344,11 @@ class ShipmentController extends Controller
      */
     public function confirmation(Request $request, Shipment $shipment)
     {
+        if($shipment->stage > 4)
+        {
+            return redirect()->route('shipments.show', $shipment)->with('info_status', 'Shipment had previously been confirmed.');
+        }
+
         $this->validate($request, [
             'yes_confirmation' => 'required'
         ]);
@@ -400,6 +413,26 @@ class ShipmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Item $item
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_item(Item $item)
+    {
+        if($item->shipment->stage < 5)
+        {
+            $item->delete();
+
+            return back()->with('success_status', 'Delete was successful.');
+        }
+        else
+        {
+            return back()->with('error_status', 'Delete failed. Shipment has been confirmed.');
+        }
     }
 
     public function setupComplete()

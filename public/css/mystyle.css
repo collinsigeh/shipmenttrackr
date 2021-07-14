@@ -24,6 +24,9 @@
     color: #ff0000;
     font-size: 12px;
     font-weight: bold;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    margin: 0;
 }
 
 .my-table-link-delete:hover{

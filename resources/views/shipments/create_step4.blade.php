@@ -19,35 +19,7 @@
 
                 <div class="card-body">
 
-                    @if (session('info_status'))
-                        <div class="alert alert-info alert-dismissible fade show">
-                            {{ session('info_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if (session('success_status'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            {{ session('success_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if (session('error_status'))
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            {{ session('error_status') }}
-
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    @include('messages.status_alert')
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show">
@@ -347,7 +319,14 @@
                                                             </div>
                                                         </td>
         
-                                                        <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
+                                                        <td class="text-right">
+                                                            <form action="{{ route('shipments.destroy_item', $item) }}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button type="submit" class="my-table-link-delete">Delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
