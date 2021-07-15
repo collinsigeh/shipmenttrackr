@@ -19,4 +19,9 @@ class Status extends Model
 
         return $this->hasMany(Shipment::class);
     }
+
+    public function locations(){
+        
+        return $this->hasMany(Location::class);
+    }
 }
