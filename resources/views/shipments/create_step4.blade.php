@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-8"><span class="badge badge-primary">Step 4 of 4</span> - Add cargo items</div>
 
-                        <div class="col-4 text-right"><a href="{{ route('shipments.show', $shipment) }}" class="my-default-link">Skip for now</a></div>
+                        <div class="col-4 text-right"><a href="{{ route('shipments.index') }}" class="my-default-link">Skip for now</a></div>
                     </div>
                 </div>
 

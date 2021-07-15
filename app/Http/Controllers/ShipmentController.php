@@ -264,7 +264,7 @@ class ShipmentController extends Controller
     {
         if($shipment->stage > 4)
         {
-            return redirect()->route('shipments.show', $shipment)->with('info_status', 'Shipment had previously been confirmed.');
+            return redirect()->route('shipments.show', $shipment)->with('error_status', 'Shipment had previously been confirmed.');
         }
         
         $shipment_total = $this->shipmentTotal($shipment);
@@ -387,7 +387,7 @@ class ShipmentController extends Controller
 
     public function store_location(Request $request, Shipment $shipment)
     {
-        if($shipment->stage >= 6)
+        if($shipment->stage >= '6')
         {
             return back()->with('error_status', 'This order is complete.');
         }
@@ -474,12 +474,56 @@ class ShipmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Shipment $shipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Shipment $shipment)
     {
-        //
+        if($shipment->stage >= 6)
+        {
+            return back()->with('error_status', 'This order is complete.');
+        }
+
+        $this->validate($request, [
+            'shipment_status' => 'required|integer|min:1'
+        ]);
+
+        $chosen_status = Status::find($request->shipment_status);
+
+        if(!$chosen_status)
+        {
+            return back()->with('error_status', 'Invalid shipment status selected.');
+        }
+
+        // Requesting for confirmation for completed shipments
+        if($chosen_status->name == 'Complete' OR $chosen_status->name == 'Completed' OR
+            $chosen_status->name == 'Order Complete' OR $chosen_status->name == 'Order Completed')
+        {
+            
+            $this->validate($request, [
+                'yes_confirmation' => 'required|integer|min:1'
+            ]);
+
+            if($request->yes_confirmation != 1)
+            {
+                return back()->with('error_status', 'The yes confirmation is required for completion status.');
+            }
+        }
+
+        $shipment->status_id = $request->shipment_status;
+
+        $shipment->save();
+        
+        // Now to check and update the shipment stage as necessary
+        if($shipment->status->name == 'Complete' OR $shipment->status->name == 'Completed' OR
+            $shipment->status->name == 'Order Complete' OR $shipment->status->name == 'Order Completed')
+        {
+            $shipment->stage = '6';
+
+            $shipment->save();
+        }
+
+        return back()->with('success_status', 'Update saved.');
     }
 
     /**
@@ -505,7 +549,27 @@ class ShipmentController extends Controller
         {
             $item->delete();
 
-            return back()->with('success_status', 'Delete was successful.');
+            return back()->with('success_status', 'Cargo item deleted.');
+        }
+        else
+        {
+            return back()->with('error_status', 'Delete failed. Shipment has been confirmed.');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Location $location
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_location(Location $location)
+    {
+        if($location->shipment->stage < 6)
+        {
+            $location->delete();
+
+            return back()->with('success_status', 'Location details deleted.');
         }
         else
         {

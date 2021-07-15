@@ -83,7 +83,24 @@
                                                 <tr>
                                                     <td class="text-muted" style="width: 130px;"><small>Order Status</small></td>
                 
-                                                    <td><span class="badge badge-pill badge-primary">{{ $shipment->status->name }}</span></td>
+                                                    <td><span class="badge badge-pill 
+                                                        @php
+                                                            if($shipment->status->name == 'Pending')
+                                                            {
+                                                                echo 'badge-light';
+                                                            }
+                                                            elseif($shipment->status->name == 'Complete' OR
+                                                                    $shipment->status->name == 'Completed' OR
+                                                                    $shipment->status->name == 'Order Complete' OR
+                                                                    $shipment->status->name == 'Order Completed')
+                                                            {
+                                                                echo 'badge-success';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo 'badge-primary';
+                                                            }
+                                                        @endphp">{{ $shipment->status->name }}</span></td>
                                                 </tr>
                 
                                                 <tr>
@@ -304,7 +321,14 @@
                                                                 </span>
                                                         </td>
         
-                                                        <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
+                                                        <td class="text-right">
+                                                            <form action="{{ route('shipments.destroy_location', $location) }}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button type="submit" class="my-table-link-delete">Delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -323,7 +347,7 @@
                                     New location
                                 </button>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmShipment">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateShipmentStatus">
                                     Shipment status
                                 </button>
                             </div>
@@ -332,7 +356,14 @@
                     
                     <div id="new-shipment-step-option2">
                         <div class="my-form-title">
-                            Cargo items
+                            Cargo items: 
+                            <span class="badge badge-secondary">
+                                @if ($shipment->items->count())
+                                    {{ $shipment->items->count() }}
+                                @else
+                                    0
+                                @endif
+                            </span>
                         </div>
                         
                         <div class="my-box-content">
@@ -433,6 +464,8 @@
 </div>
 
 @include('modals.add_new_location')
+
+@include('modals.update_shipment_status')
 
 @foreach ($shipment->locations as $location)
     @include('modals.edit_location')
