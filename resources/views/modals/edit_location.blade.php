@@ -30,7 +30,13 @@
 
                                         <input type="date" name="date" id="date" class="form-control @error('date')
                                                 is-invalid
-                                            @enderror" value="{{ $location->date }}" required>
+                                            @enderror" value="{{ $location->date }}" 
+                                            
+                                            @if ($location->shipment->stage < 6)
+                                                {{ 'required' }}
+                                            @else
+                                                {{ 'disabled' }}
+                                            @endif>
                                             
                                         @error('date')
                                             <span class="invalid-feedback" role="alert">
@@ -46,7 +52,13 @@
 
                                         <input type="time" name="time" id="time" class="form-control @error('time')
                                                 is-invalid
-                                            @enderror" value="{{ $location->time }}">
+                                            @enderror" value="{{ $location->time }}"
+                                            
+                                            @if ($location->shipment->stage < 6)
+                                                {{ '' }}
+                                            @else
+                                                {{ 'disabled' }}
+                                            @endif>
                                         <small class="text-muted">** Optional</small>
                                             
                                         @error('time')
@@ -67,7 +79,13 @@
 
                                         <select name="shipment_status" id="shipment_status" class="form-control @error('shipment_status')
                                                     is-invalid
-                                                @enderror" required>
+                                                @enderror"
+                                            
+                                                @if ($location->shipment->stage < 6)
+                                                    {{ 'required' }}
+                                                @else
+                                                    {{ 'disabled' }}
+                                                @endif>
 
                                             <option value="{{ $location->status->id }}">{{ $location->status->name }}</option>
                                             <option value="">--</option>
@@ -91,7 +109,13 @@
         
                                         <textarea name="remark" id="remark" class="form-control @error('remark')
                                                 is-invalid
-                                            @enderror" placeholder="Optional">{{ $location->remark }}</textarea>
+                                            @enderror" placeholder="Optional"
+                                            
+                                            @if ($location->shipment->stage < 6)
+                                                {{ '' }}
+                                            @else
+                                                {{ 'disabled' }}
+                                            @endif>{{ $location->remark }}</textarea>
                                             
                                         @error('remark')
                                             <span class="invalid-feedback" role="alert">
@@ -107,7 +131,7 @@
 
                 <div class="modal-footer">
                     <a href="" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                    
+
                     @if ($location->shipment->stage < 6)
                         <input type="submit" class="btn btn-primary" value="Save changes">
                     @endif
