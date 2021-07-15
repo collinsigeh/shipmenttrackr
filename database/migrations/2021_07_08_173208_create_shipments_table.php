@@ -16,7 +16,7 @@ class CreateShipmentsTable extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->string('tracking_code')->unique();
-            $table->enum('stage', ['4', '5'])->default('4');
+            $table->enum('stage', ['4', '5', '6'])->default('4');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('sender_id')->constrained()->onDelete('cascade');
             $table->foreignId('receiver_id')->constrained()->onDelete('cascade');

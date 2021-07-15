@@ -375,10 +375,48 @@ class ShipmentController extends Controller
 
         $shipment_total = $this->shipmentTotal($shipment);
 
+        $statuses = Status::orderBy('name', 'asc')->get();
+
         return view('shipments.show')->with([
             'shipment' => $shipment,
             'shipment_total' => $shipment_total,
+            'statuses' => $statuses,
         ]);
+    }
+
+    public function store_location(Request $request, Shipment $shipment)
+    {
+        if($shipment->stage >= 6)
+        {
+            return back()->with('error_status', 'This order is complete.');
+        }
+        
+        $this->validate($request, [
+            'date' => 'required',
+            'location_name' => 'required|max:255',
+            'shipment_status' => 'required|integer|min:1'
+        ]);
+
+        if($request->special_note)
+        {
+            $this->validate($request, ['special_note' => 'string|max:255']);
+        }
+
+        if(!Status::find($request->shipment_status))
+        {
+            return back()->with('error_status', 'Invalid shipment status selected.');
+        }
+
+        auth()->user()->locations()->create([
+                'shipment_id' => $shipment->id,
+                'name' => $request->location_name,
+                'status_id' => $request->shipment_status,
+                'date' => $request->date,
+                'time' => $request->time,
+                'remark' => $request->remark
+            ]);
+
+        return redirect()->back()->with('success_status', 'The location has been added successfully.');
     }
 
     /**

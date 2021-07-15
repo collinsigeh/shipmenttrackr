@@ -271,7 +271,7 @@
                                                                 </div>
         
                                                                 <div class="col-md-6">
-                                                                    @if ($item->remark)
+                                                                    @if ($location->remark)
                                                                         <small class="text-muted">{{ $location->remark }}</small>
                                                                     @endif
                                                                 </div>
@@ -279,7 +279,25 @@
                                                         </td>
 
                                                         <td>
-                                                            <span class="badge badge-pill badge-primary">{{ $location->status }}</span>
+                                                            <span class="badge badge-pill 
+                                                                    @php
+                                                                        if($location->status->name == 'Pending')
+                                                                        {
+                                                                            echo 'badge-light';
+                                                                        }
+                                                                        elseif($location->status->name == 'Complete' OR
+                                                                                $location->status->name == 'Completed' OR
+                                                                                $location->status->name == 'Order Complete' OR
+                                                                                $location->status->name == 'Order Completed')
+                                                                        {
+                                                                            echo 'badge-success';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            echo 'badge-primary';
+                                                                        }
+                                                                    @endphp">{{ $location->status->name }}
+                                                                </span>
                                                         </td>
         
                                                         <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
@@ -410,6 +428,6 @@
     </div>
 </div>
 
-@include('modals.confirm_shipment')
+@include('modals.add_new_location')
 
 @endsection
