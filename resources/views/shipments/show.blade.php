@@ -258,7 +258,7 @@
         
                                                         <td style="padding-bottom: 20px;">
                                                             <p>
-                                                                <a href="" class="my-table-link"><strong>{{ $location->name }}</strong></a>
+                                                                <a href="" data-toggle="modal" data-target="#editLocation{{ $location->id }}" class="my-table-link"><strong>{{ $location->name }}</strong></a>
                                                             </p>
         
                                                             <div class="row">        
@@ -267,7 +267,11 @@
                                                                 </div>
                                                                        
                                                                 <div class="col-md-3">
-                                                                    <small class="text-muted"><em>Time: &nbsp;</em> {{ $location->time }}</small>
+                                                                    <small class="text-muted"><em>Time: &nbsp;</em> @if ($location->time)
+                                                                        {{ $location->time }}
+                                                                    @else
+                                                                        --
+                                                                    @endif</small>
                                                                 </div>
         
                                                                 <div class="col-md-6">
@@ -429,5 +433,9 @@
 </div>
 
 @include('modals.add_new_location')
+
+@foreach ($shipment->locations as $location)
+    @include('modals.edit_location')
+@endforeach
 
 @endsection

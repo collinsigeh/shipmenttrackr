@@ -52,3 +52,4 @@ Route::delete('shipments/{item}/delete_item', [ShipmentController::class, 'destr
 Route::put('shipments/{shipment:tracking_code}/confirmation', [ShipmentController::class, 'confirmation'])->name('shipments.confirmation');
 Route::get('shipments/{shipment:tracking_code}/', [ShipmentController::class, 'show'])->name('shipments.show');
 Route::post('shipments/{shipment:tracking_code}/store_location', [ShipmentController::class, 'store_location'])->name('shipments.store_location');
+Route::put('shipments/location/{location}/update', [ShipmentController::class, 'update_location'])->name('shipments.update_location');

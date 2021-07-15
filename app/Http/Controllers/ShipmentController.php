@@ -12,6 +12,7 @@ use App\Models\Mode;
 use App\Models\Shipment;
 use App\Models\QuantityType;
 use App\Models\Item;
+use App\Models\Location;
 
 class ShipmentController extends Controller
 {
@@ -417,6 +418,45 @@ class ShipmentController extends Controller
             ]);
 
         return redirect()->back()->with('success_status', 'The location has been added successfully.');
+    }
+
+    /**
+     * Update check for shipment status and update location accordingly.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Model $shipment
+     * @return \Illuminate\Http\Response
+     */
+    public function update_location(Request $request, Location $location)
+    {
+        if($location->shipment->stage >= 6)
+        {
+            return back()->with('error_status', 'This order is complete.');
+        }
+        
+        $this->validate($request, [
+            'date' => 'required',
+            'shipment_status' => 'required|integer|min:1'
+        ]);
+
+        if($request->special_note)
+        {
+            $this->validate($request, ['special_note' => 'string|max:255']);
+        }
+
+        if(!Status::find($request->shipment_status))
+        {
+            return back()->with('error_status', 'Invalid shipment status selected.');
+        }
+
+        $location->date = $request->date;
+        $location->time = $request->time;
+        $location->status_id = $request->shipment_status;
+        $location->remark = $request->remark;
+
+        $location->save();
+
+        return redirect()->route('shipments.show', $location->shipment)->with('success_status', 'Update saved.');
     }
 
     /**
