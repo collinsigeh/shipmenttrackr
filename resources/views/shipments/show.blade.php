@@ -320,15 +320,17 @@
                                                                     @endphp">{{ $location->status->name }}
                                                                 </span>
                                                         </td>
-        
-                                                        <td class="text-right">
-                                                            <form action="{{ route('shipments.destroy_location', $location) }}" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                        
+                                                        @if ($shipment->stage < 6)
+                                                            <td class="text-right">
+                                                                <form action="{{ route('shipments.destroy_location', $location) }}" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
 
-                                                                <button type="submit" class="my-table-link-delete">Delete</button>
-                                                            </form>
-                                                        </td>
+                                                                    <button type="submit" class="my-table-link-delete">Delete</button>
+                                                                </form>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -341,16 +343,18 @@
                                     No shipment history found.
                                 </div>
                             @endif
-    
-                            <div class="text-right">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newLocation" style="margin-right: 20px;">
-                                    New location
-                                </button>
+                            
+                            @if ($shipment->stage < 6)
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newLocation" style="margin-right: 20px;">
+                                        New location
+                                    </button>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateShipmentStatus">
-                                    Shipment status
-                                </button>
-                            </div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateShipmentStatus">
+                                        Shipment status
+                                    </button>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     
