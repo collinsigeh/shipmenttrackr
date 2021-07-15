@@ -246,58 +246,40 @@
                         </div>
                         
                         <div class="my-box-content">
-                            @if ($shipment->items->count())
+                            @if ($shipment->locations->count())
 
                                 <div class="info-set">
                                     <div class="table-responsive">
                                         <table class="table table-sm table-hover">                
                                             <tbody>
-                                                @foreach ($shipment->items as $item)
+                                                @foreach ($shipment->locations as $location)
                                                     <tr>
                                                         <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
         
                                                         <td style="padding-bottom: 20px;">
                                                             <p>
-                                                                <strong>
-                                                                    {{ 
-                                                                        $item->quantity_number . ' ' 
-                                                                            . Str::plural($item->quantityType->name, $item->quantity_number) 
-                                                                            . ' of ' . $item->name 
-                                                                    }}
-                                                                </strong>
+                                                                <a href="" class="my-table-link"><strong>{{ $location->name }}</strong></a>
                                                             </p>
         
-                                                            <div class="row">
+                                                            <div class="row">        
                                                                 <div class="col-md-3">
-                                                                    <small class="text-muted">{{ $item->currency . ' ' . $item->value }}</small>
+                                                                    <small class="text-muted"><em>Date: &nbsp;</em> {{ $location->date }}</small>
+                                                                </div>
+                                                                       
+                                                                <div class="col-md-3">
+                                                                    <small class="text-muted"><em>Time: &nbsp;</em> {{ $location->time }}</small>
                                                                 </div>
         
-                                                                <div class="col-md-3">
-                                                                    <small class="text-muted"><em>Wgt: &nbsp;</em> 4000kg</small>
-                                                                </div>
-
-                                                                <div class="col-md-3">
-                                                                    <small class="text-muted">
-        
-                                                                        <em>Vol: &nbsp;&nbsp;&nbsp;</em>
-        
-                                                                        @if ($item->length > 0 && $item->width > 0 && $item->height > 0)
-                                                                            
-                                                                            {{ $item->length * $item->width * $item->height }} cm<sup><small>3</small></sup>
-                                                                        @else
-                                                                            
-                                                                            {{ '--' }}
-                                                                        @endif
-        
-                                                                    </small>
-                                                                </div>
-        
-                                                                <div class="col-md-3">
-                                                                    @if ($item->special_note)
-                                                                        <small class="text-muted">{{ $item->special_note }}</small>
+                                                                <div class="col-md-6">
+                                                                    @if ($item->remark)
+                                                                        <small class="text-muted">{{ $location->remark }}</small>
                                                                     @endif
                                                                 </div>
                                                             </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="badge badge-pill badge-primary">{{ $location->status }}</span>
                                                         </td>
         
                                                         <td class="text-right"><a href="" class="my-table-link-delete">Delete</a></td>
@@ -315,15 +297,13 @@
                             @endif
     
                             <div class="text-right">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newLocation">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newLocation" style="margin-right: 20px;">
                                     New location
                                 </button>
-                                
-                                @if ($shipment->items->count())
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmShipment">
-                                        Confirm shipment
-                                    </button>
-                                @endif
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmShipment">
+                                    Shipment status
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -360,7 +340,7 @@
                                                             </div>
     
                                                             <div class="col-md-3">
-                                                                <small class="text-muted"><em>Wgt: &nbsp;</em> 4000kg</small>
+                                                                <small class="text-muted"><em>Wgt: &nbsp;</em> {{ $item->weight }}kg</small>
                                                             </div>
 
                                                             <div class="col-md-3">

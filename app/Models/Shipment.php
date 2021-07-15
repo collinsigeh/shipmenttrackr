@@ -61,4 +61,10 @@ class Shipment extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function locations()
+    {
+
+        return $this->hasMany(Location::class);
+    }
+
 }

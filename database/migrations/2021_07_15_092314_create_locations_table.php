@@ -15,6 +15,13 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('shipment_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->foreignId('status_id')->constrained()->onDelete('cascade');
+            $table->date('date');
+            $table->time('time')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

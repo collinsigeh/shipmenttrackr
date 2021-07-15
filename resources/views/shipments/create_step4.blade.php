@@ -292,7 +292,7 @@
                                                                 </div>
         
                                                                 <div class="col-md-3">
-                                                                    <small class="text-muted"><em>Wgt: &nbsp;</em> 4000kg</small>
+                                                                    <small class="text-muted"><em>Wgt: &nbsp;</em> {{ $item->weight }}kg</small>
                                                                 </div>
 
                                                                 <div class="col-md-3">
@@ -341,7 +341,7 @@
                             @endif
     
                             <div class="text-right">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newItem">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newItem" style="margin-right: 20px;">
                                     New Item
                                 </button>
                                 
