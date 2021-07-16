@@ -28,7 +28,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        //
+        $shipments = Shipment::orderBy('tracking_code', 'asc')->simplePaginate(50);
+
+        return view('shipments.index')->with('shipments', $shipments);
     }
 
     /**
@@ -251,7 +253,7 @@ class ShipmentController extends Controller
                             'comments' => $request->comments
                         ]);
         
-        $new_tracking_code = 'dgg-' . $request->sender_id . $request->receiver_id . '-' . $shipment->id;
+        $new_tracking_code = $shipment->id . '-' . $request->sender_id . '-' . $request->receiver_id;
         
         $shipment->tracking_code = strtolower($new_tracking_code);
 
