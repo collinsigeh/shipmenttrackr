@@ -35,6 +35,7 @@
                 <div class="card-body">
                     
                     <a href="{{ route('status.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Order status &rarr;</a>
+                    <a href="{{ route('quantity_types.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Quantity Type &rarr;</a>
                     <a href="{{ route('type.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Shipment types &rarr;</a>
                     <a href="{{ route('mode.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Transportation Mode &rarr;</a>
 

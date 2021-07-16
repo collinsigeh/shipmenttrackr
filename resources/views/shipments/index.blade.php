@@ -3,9 +3,19 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 mb-4">
+        <div class="col-md-12 mb-4">
             <div class="card">
-                <div class="card-header">{{ __('Shipments') }}</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            {{ __('Shipments') }}
+                        </div>
+
+                        <div class="col-4 text-right">
+                            <a href="{{ route('home') }}" class="my-default-link">&larr; Home</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body">
 
@@ -31,6 +41,8 @@
                                                 <th>Sender</th>
                                                 <th>Receiver</th>
                                                 <th>Status</th>
+                                                <th class="text-right">Expected delivery</th>
+                                                <th class="text-right">Actual delivery</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -73,7 +85,27 @@
                                                     </td>
 
                                                     <td class="text-right">
-                                                        @if ($shipment->stage < 6)
+                                                        <small>
+                                                            @if ($shipment->expected_delivery_date)
+                                                                {{ date('d M, Y', strtotime($shipment->expected_delivery_date)) }}
+                                                            @else
+                                                                --
+                                                            @endif
+                                                        </small>
+                                                    </td>
+
+                                                    <td class="text-right">
+                                                        <small>
+                                                            @if ($shipment->actual_delivery_date)
+                                                                {{ date('d M, Y', strtotime($shipment->actual_delivery_date)) }}
+                                                            @else
+                                                                --
+                                                            @endif
+                                                        </small>
+                                                    </td>
+
+                                                    <td class="text-right">
+                                                        @if ($shipment->stage <= 4)
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -91,22 +123,6 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">{{ __('Settings') }}</div>
-
-                <div class="card-body">
-                    
-                    <a href="" class="btn btn-sm btn-block btn-outline-primary text-left">My account &rarr;</a>
-                    <a href="{{ route('status.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Order status &rarr;</a>
-                    <a href="{{ route('type.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Shipment types &rarr;</a>
-                    <a href="{{ route('mode.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Transportation Mode &rarr;</a>
-                    <a href="{{ route('quantity_types.index') }}" class="btn btn-sm btn-block btn-outline-primary text-left">Quantity Type &rarr;</a>
 
                 </div>
             </div>

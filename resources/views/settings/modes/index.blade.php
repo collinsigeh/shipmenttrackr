@@ -2,9 +2,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="mb-4">
-        <h3>Transportation mode settings</h3>
-    </div>
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">

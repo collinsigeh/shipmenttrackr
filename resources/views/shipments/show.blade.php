@@ -7,6 +7,17 @@
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            Shipment <span class="badge badge-primary">{{ $shipment->tracking_code }}</span>
+                        </div>
+
+                        <div class="col-4 text-right">
+                            <a href="{{ route('shipments.index') }}" class="my-default-link">&larr; Shipments</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body">
 

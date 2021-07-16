@@ -373,7 +373,7 @@ class ShipmentController extends Controller
     {
         if($shipment->stage <= 4)
         {
-            return redirect()->route('shipments.create_step4', $shipment)->with('info_status', 'Please confirm the cargo items.');
+            return redirect()->route('shipments.create_step4', $shipment)->with('error_status', 'Please confirm the cargo items.');
         }
 
         $shipment_total = $this->shipmentTotal($shipment);

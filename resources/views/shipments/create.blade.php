@@ -9,7 +9,13 @@
     <div class="row">
         <div class="col-md-8 mb-4">
             <div class="card">
-                <div class="card-header"><span class="badge badge-primary">Step 1 of 4</span> - Add sender details</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8"><span class="badge badge-primary">Step 1 of 4</span> - Add sender details</div>
+
+                        <div class="col-4 text-right"><a href="{{ route('shipments.index') }}" class="my-default-link">&larr; Shipments</a></div>
+                    </div>
+                </div>
 
                 <div class="card-body">
 

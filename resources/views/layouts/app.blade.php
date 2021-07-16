@@ -65,40 +65,36 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('shipments.index') }}">
+                                       All Shipments
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('shipments.create') }}">
                                        New Shipment
                                     </a>
+                                </div>
+                            </li>
 
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Address Book
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('shipments.index') }}">
-                                       All Shipments
+                                       Shippers
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('shipments.create') }}">
+                                       Receivers
                                     </a>
                                 </div>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    Address Book
-                                </a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a href="{{ route('settings.index') }}" class="nav-link">
                                     Settings
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
-                                       Order Status Settings
-                                    </a>
-
-                                    <a class="dropdown-item" href="#">
-                                       Shipment Type Settings
-                                    </a>
-
-                                    <a class="dropdown-item" href="#">
-                                       Transportation Mode Settings
-                                    </a>
-                                </div>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -107,6 +103,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('settings.index') }}" class="dropdown-item">
+                                        My account
+                                    </a>
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

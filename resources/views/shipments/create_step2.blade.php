@@ -11,9 +11,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-8"><span class="badge badge-primary">Step 2 of 4</span> - Add sender details</div>
+                        <div class="col-9"><span class="badge badge-primary">Step 2 of 4</span> - Add sender details</div>
 
-                        <div class="col-4 text-right"><a href="{{ route('shipments.create') }}" class="my-default-link">&larr; Step 1</a></div>
+                        <div class="col-3 text-right"><a href="{{ route('shipments.create') }}" class="my-default-link">&larr; Step 1</a></div>
                     </div>
                 </div>
 
