@@ -31,7 +31,7 @@
                                 <div class="text-right mb-3">
                                     <a href="" data-toggle="modal" data-target="#searchShipment" class="btn btn-outline-primary mr-3">Search</a>
 
-                                    <a href="{{ route('shipments.create') }}" class="btn btn-primary">New shipment</a>
+                                    <a href="{{ route('shipments.create') }}" class="btn btn-primary">New contact</a>
                                 </div>
                                 
                                 @if ($addresses->count())
@@ -56,7 +56,14 @@
                                                         </td>
                 
                                                         <td>
-                                                            <a href="" class="my-table-link"><strong>{{ $address->name }}</strong></a>
+                                                            <a href=""  
+                                                                @if ($type == 'receiver' OR $type == 'receivers')
+                                                                    data-toggle="modal" data-target="#receiverSummary{{ $address->id }}"
+                                                                @else
+                                                                    data-toggle="modal" data-target="#senderSummary{{ $address->id }}"
+                                                                @endif
+                                                                
+                                                                class="my-table-link"><strong>{{ $address->name }}</strong></a>
                                                         </td>
 
                                                         <td>{{ $address->email }}</td>
@@ -104,5 +111,17 @@
         </div>
     </div>
 </div>
+
+@if ($type == 'receiver' OR $type == 'receivers')
+@foreach ($addresses as $address)
+    
+    @include('modals.receiver_summary')
+@endforeach
+@else
+    @foreach ($addresses as $address)
+        
+        @include('modals.sender_summary')
+    @endforeach
+@endif
 
 @endsection
