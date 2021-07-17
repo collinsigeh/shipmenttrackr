@@ -90,12 +90,14 @@
                                     </a>
                                 </div>
                             </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('settings.index') }}" class="nav-link">
-                                    Settings
-                                </a>
-                            </li>
+                            
+                            @if (auth()->user()->usertype == 'System admin')
+                                <li class="nav-item">
+                                    <a href="{{ route('settings.index') }}" class="nav-link">
+                                        Settings
+                                    </a>
+                                </li>
+                            @endif
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
