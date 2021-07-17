@@ -86,7 +86,36 @@ class AddressBookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'type' => 'required',
+            'email' => 'required|email',
+        ]);
+        
+        if($request->type == 'receiver' OR $request->type == 'receivers')
+        {
+            $this->validate($request, [
+                'name' => 'required|string|max:255|unique:receivers,name,'.$id
+            ]);
+
+            $address = Receiver::find($id);
+        }
+        else
+        {
+            $this->validate($request, [
+                'name' => 'required|string|max:255|unique:senders,name,'.$id
+            ]);
+
+            $address = Sender::find($id);
+        }
+
+        $address->name = $request->name;
+        $address->email = $request->email;
+        $address->phone = $request->phone;
+        $address->address = $request->address;
+
+        $address->save();
+
+        return back()->with('success_status', 'Update saved');
     }
 
     /**

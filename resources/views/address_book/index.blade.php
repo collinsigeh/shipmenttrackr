@@ -112,16 +112,16 @@
     </div>
 </div>
 
-@if ($type == 'receiver' OR $type == 'receivers')
 @foreach ($addresses as $address)
-    
-    @include('modals.receiver_summary')
-@endforeach
-@else
-    @foreach ($addresses as $address)
-        
+
+    @if ($type == 'receiver' OR $type == 'receivers')
+        @include('modals.receiver_summary')
+    @else
         @include('modals.sender_summary')
-    @endforeach
-@endif
+    @endif
+
+    @include('modals.edit_address')
+
+@endforeach
 
 @endsection

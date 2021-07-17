@@ -59,3 +59,4 @@ Route::post('shipments/search/', [ShipmentController::class, 'search'])->name('s
 Route::get('shipments/list/{type?}', [ShipmentController::class, 'list'])->name('shipments.list');
 
 Route::get('address_book/{type?}', [AddressBookController::class, 'index'])->name('address_book');
+Route::put('address_book/{id}/update', [AddressBookController::class, 'update'])->name('address_book.update');
