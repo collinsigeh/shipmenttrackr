@@ -16,7 +16,7 @@
                         <div class="title">ACTIVE SHIPMENTS</div>
                         <div class="value">{{ $active_shipments }}</div>
                         <div class="action-buttons">
-                            <a href="" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
+                            <a href="{{ route('shipments.list', 'active') }}" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <div class="title">PENDING SHIPMENTS</div>
                         <div class="value">{{ $pending_shipments }}</div>
                         <div class="action-buttons">
-                            <a href="" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
+                            <a href="{{ route('shipments.list', 'pending') }}" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="title">COMPLETED SHIPMENTS</div>
                         <div class="value">{{ $completed_shipments }}</div>
                         <div class="action-buttons">
-                            <a href="" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
+                            <a href="{{ route('shipments.list', 'completed') }}" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <div class="title">ALL SHIPMENTS</div>
                         <div class="value">{{ $all_shipments }}</div>
                         <div class="action-buttons">
-                            <a href="" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
+                            <a href="{{ route('shipments.list', 'all') }}" class="btn btn-sm btn-secondary my-btn-sm">View all</a>
                         </div>
                     </div>
                 </div>

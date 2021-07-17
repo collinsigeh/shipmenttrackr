@@ -699,12 +699,56 @@ class ShipmentController extends Controller
         }
         
         $shipments = Shipment::where($db_check)->orderBy('tracking_code', 'asc')->get();
+        
+        /**
+        $shipments = Shipment::where($db_check)->count();
+        
+        $shipments = Shipment::where($db_check)->orderBy('tracking_code', 'asc')->simplePaginate(1);
+
+        */
 
         $statuses = Status::orderBy('name', 'asc')->get();
         $senders = Sender::orderBy('name', 'asc')->get();
         $receivers = Receiver::orderBy('name', 'asc')->get();
 
         return view('shipments.search')->with([
+            'shipments' => $shipments,
+            'statuses' => $statuses,
+            'senders' => $senders,
+            'receivers' => $receivers,
+        ]);
+    }
+
+    public function list($type = 'all'){
+
+        if($type == 'active')
+        {
+            $total = Shipment::where('stage', '5')->count();
+            $shipments = Shipment::where('stage', '5')->orderBy('tracking_code', 'asc')->simplePaginate(50);
+        }
+        elseif($type == 'pending')
+        {
+            $total = Shipment::where('stage', '<=', '4')->count();
+            $shipments = Shipment::where('stage', '<=', '4')->orderBy('tracking_code', 'asc')->simplePaginate(50);
+        }
+        elseif($type == 'completed')
+        {
+            $total = Shipment::where('stage', '>=', '6')->count();
+            $shipments = Shipment::where('stage', '>=', '6')->orderBy('tracking_code', 'asc')->simplePaginate(50);
+        }
+        else
+        {
+            $total = Shipment::count();
+            $shipments = Shipment::orderBy('tracking_code', 'asc')->simplePaginate(50);
+        }
+
+        $statuses = Status::orderBy('name', 'asc')->get();
+        $senders = Sender::orderBy('name', 'asc')->get();
+        $receivers = Receiver::orderBy('name', 'asc')->get();
+
+        return view('shipments.list')->with([
+            'total' => $total,
+            'type' => $type,
             'shipments' => $shipments,
             'statuses' => $statuses,
             'senders' => $senders,
