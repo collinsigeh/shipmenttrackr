@@ -462,14 +462,14 @@ class ShipmentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Should show the form for editing the specified resource BUT now redirects back to all shipments.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        return redirect()->route('shipments.index');
     }
 
     /**
@@ -531,12 +531,25 @@ class ShipmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Shipment $shipment)
     {
-        //
+        $this->validate($request, [
+            'yes_confirmation' => 'required'
+        ]);
+
+        if($shipment->stage < 5)
+        {
+            $shipment->delete();
+
+            return back()->with('success_status', 'Shipment deleted.');
+        }
+        else
+        {
+            return back()->with('error_status', 'Delete failed. Shipment has been confirmed.');
+        }
     }
 
     /**

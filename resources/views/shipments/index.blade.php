@@ -117,13 +117,9 @@
                                                         </td>
 
                                                         <td class="text-right">
+
                                                             @if ($shipment->stage <= 4)
-                                                                <form action="" method="post">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                
-                                                                    <button type="submit" class="my-table-link-delete">Delete</button>
-                                                                </form>
+                                                                <a href=""  data-toggle="modal" data-target="#deleteShipment{{ $shipment->id }}" class="my-table-link-delete">Delete</a>
                                                             @endif
                                                         </td>
                                                         
@@ -150,4 +146,9 @@
         </div>
     </div>
 </div>
+
+@foreach ($shipments as $shipment)
+    @include('modals.delete_shipment')
+@endforeach
+
 @endsection
