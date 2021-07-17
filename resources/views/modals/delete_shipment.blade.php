@@ -18,7 +18,7 @@
                         Hint:
                         <ol>
                             <li>Check the "<strong>Yes</strong>" confirmation box.</li>
-                            <li>Click on "<strong>Delete</strong>" button to proceed.</li>
+                            <li>Click on the "<strong>Delete</strong>" button to proceed.</li>
                         </ol>                        
                     </div>
                     

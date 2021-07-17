@@ -8,16 +8,20 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            {{ __('Shipments') }}
+                            {{ __('Search outcome') }}
                         </div>
 
                         <div class="col-4 text-right">
-                            <a href="{{ route('home') }}" class="my-default-link">&larr; Home</a>
+                            <a href="{{ route('shipments.index') }}" class="my-default-link">&larr; Shipments</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body" style="min-height: 550px;">
+
+                    <div class="alert alert-info">
+                        {{ $shipments->count() . ' '. Str::plural('result', $shipments->count()) }} found.
+                    </div>
 
                     @include('messages.status_alert')
 
@@ -129,10 +133,6 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-
-                                    <div style="padding-bottom: 30px;">
-                                        {{ $shipments->links() }}
                                     </div>
                                 @else
                                     <div class="alert alert-info">

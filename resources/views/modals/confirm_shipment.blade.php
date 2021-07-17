@@ -15,10 +15,12 @@
                 <div class="modal-body">
 
                     <div class="alert alert-info">
-                        <p>
-                            Check the "<strong>Yes</strong>" confirmation box if all cargo items have been added.
-                        </p>
-                        Then, click on "<strong>Save</strong>" button.
+                        Hint:
+                        <ol>
+                            <li>Ensure all cargo items have been added.</li>
+                            <li>Check the "<strong>Yes</strong>" confirmation box below.</li>
+                            <li>Click on the "<strong>Save</strong>" button.</li>
+                        </ol>
                     </div>
                     
                     <div class="my-box">

@@ -64,7 +64,8 @@
             <div class="dashboard-info-set">
 
                 <div class="text-right mb-4">
-                    <a href="" class="btn btn-outline-primary mr-3">Search</a>
+                    <a href="" data-toggle="modal" data-target="#searchShipment" class="btn btn-outline-primary mr-3">Search</a>
+
                     <a href="{{ route('shipments.create') }}" class="btn btn-primary">New shipment</a>
                 </div>
                                 
@@ -147,4 +148,7 @@
             </div>
     </div>
 </div>
+
+@include('modals.search_shipment')
+
 @endsection

@@ -54,3 +54,4 @@ Route::get('shipments/{shipment:tracking_code}/', [ShipmentController::class, 's
 Route::post('shipments/{shipment:tracking_code}/store_location', [ShipmentController::class, 'store_location'])->name('shipments.store_location');
 Route::put('shipments/location/{location}/update', [ShipmentController::class, 'update_location'])->name('shipments.update_location');
 Route::delete('shipments/{location}/delete_location', [ShipmentController::class, 'destroy_location'])->name('shipments.destroy_location');
+Route::post('shipments/search/', [ShipmentController::class, 'search'])->name('shipments.search');;

@@ -28,9 +28,20 @@ class ShipmentController extends Controller
      */
     public function index()
     {
+        $statuses = Status::orderBy('name', 'asc')->get();
+
+        $senders = Sender::orderBy('name', 'asc')->get();
+
+        $receivers = Receiver::orderBy('name', 'asc')->get();
+
         $shipments = Shipment::orderBy('tracking_code', 'asc')->simplePaginate(50);
 
-        return view('shipments.index')->with('shipments', $shipments);
+        return view('shipments.index')->with([
+            'statuses' => $statuses,
+            'senders' => $senders,
+            'receivers' => $receivers,
+            'shipments' => $shipments,
+        ]);
     }
 
     /**
@@ -661,5 +672,43 @@ class ShipmentController extends Controller
         );
 
         return $shipment_total;
+    }
+
+    public function search(Request $request){
+
+        $db_check = [];
+
+        if($request->tc)
+        {
+            array_push($db_check, ['tracking_code', 'like', '%'.$request->tc.'%']);
+        }
+
+        if($request->shipment_status)
+        {
+            array_push($db_check, ['status_id', $request->shipment_status]);
+        }
+
+        if($request->sender)
+        {
+            array_push($db_check, ['sender_id', $request->sender]);
+        }
+
+        if($request->receiver)
+        {
+            array_push($db_check, ['receiver_id', $request->receiver]);
+        }
+        
+        $shipments = Shipment::where($db_check)->orderBy('tracking_code', 'asc')->get();
+
+        $statuses = Status::orderBy('name', 'asc')->get();
+        $senders = Sender::orderBy('name', 'asc')->get();
+        $receivers = Receiver::orderBy('name', 'asc')->get();
+
+        return view('shipments.search')->with([
+            'shipments' => $shipments,
+            'statuses' => $statuses,
+            'senders' => $senders,
+            'receivers' => $receivers,
+        ]);
     }
 }
