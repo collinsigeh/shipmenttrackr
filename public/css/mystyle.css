@@ -104,3 +104,61 @@
     border-radius: 3px;
     margin-bottom: 30px;
 }
+
+.dashboard-box{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fbfbfb;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+
+#active-shipments{
+    border-top: 3px solid #0066ff;
+}
+
+#pending-shipments{
+    border-top: 3px solid #ffcc00;
+}
+
+#completed-shipments{
+    border-top: 3px solid #00cc00;
+}
+
+#all-shipments{
+    border-top: 3px solid #666;
+}
+
+.dashboard-box .title{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dashboard-box .value{
+    font-size: 48px;
+    text-align: right;
+    margin-top: -20px;
+}
+
+.dashboard-box .action-buttons{
+    text-align: right;
+    margin-top: -10px;
+}
+
+.text-muted th{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.my-btn-sm{
+    padding: 2px 10px 1px 10px;
+}
+
+.dashboard-info-set{
+    background-color: #fbfbfb;
+    padding: 20px 20px 0 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc; 
+    border-top: 3px solid #666; 
+}

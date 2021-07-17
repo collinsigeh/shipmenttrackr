@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Shipment;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $active_shipments = Shipment::where('stage', '5')->count();
+        $pending_shipments = Shipment::where('stage', '<=', '4')->count();
+        $completed_shipments = Shipment::where('stage', '>=', '6')->count();
+
+        $all_shipments = Shipment::count();
+
+        $shipments = Shipment::orderBy('created_at', 'asc')->limit(10)->get();
+
+        return view('home')->with([
+            'active_shipments' => $active_shipments,
+            'pending_shipments' => $pending_shipments,
+            'completed_shipments' => $completed_shipments,
+            'all_shipments' => $all_shipments,
+            'shipments' => $shipments,
+        ]);;
     }
 }

@@ -17,7 +17,7 @@
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" style="min-height: 550px;">
 
                     @include('messages.status_alert')
                     
@@ -31,95 +31,116 @@
                             
                             <div style="height: 10px;"></div>
                             <div class="info-set">
-
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Tracking Code</th>
-                                                <th>Sender</th>
-                                                <th>Receiver</th>
-                                                <th>Status</th>
-                                                <th class="text-right">Expected delivery</th>
-                                                <th class="text-right">Actual delivery</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-            
-                                        <tbody>
-                                            @foreach ($shipments as $shipment)
+                                
+                                @if ($shipments->count())
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">
+                                            <thead class="text-muted">
                                                 <tr>
-                                                    <td><img src="{{ asset('images/info-icon.png') }}" alt=""></td>
-            
-                                                    <td style="padding-bottom: 20px;">
-                                                        <p>
-                                                            <a href="{{ route('shipments.show', $shipment) }}" class="my-table-link"><strong>{{ $shipment->tracking_code }}</strong></a>
-                                                        </p>
-                                                    </td>
-
-                                                    <td>{{ $shipment->sender->name }}</td>
-
-                                                    <td>{{ $shipment->receiver->name }}</td>
-            
-                                                    <td>
-                                                        <span class="badge badge-pill 
-                                                                @php
-                                                                    if($shipment->status->name == 'Pending')
-                                                                    {
-                                                                        echo 'badge-light';
-                                                                    }
-                                                                    elseif($shipment->status->name == 'Complete' OR
-                                                                            $shipment->status->name == 'Completed' OR
-                                                                            $shipment->status->name == 'Order Complete' OR
-                                                                            $shipment->status->name == 'Order Completed')
-                                                                    {
-                                                                        echo 'badge-success';
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        echo 'badge-primary';
-                                                                    }
-                                                                @endphp">{{ $shipment->status->name }}
-                                                            </span>
-                                                    </td>
-
-                                                    <td class="text-right">
-                                                        <small>
-                                                            @if ($shipment->expected_delivery_date)
-                                                                {{ date('d M, Y', strtotime($shipment->expected_delivery_date)) }}
-                                                            @else
-                                                                --
-                                                            @endif
-                                                        </small>
-                                                    </td>
-
-                                                    <td class="text-right">
-                                                        <small>
-                                                            @if ($shipment->actual_delivery_date)
-                                                                {{ date('d M, Y', strtotime($shipment->actual_delivery_date)) }}
-                                                            @else
-                                                                --
-                                                            @endif
-                                                        </small>
-                                                    </td>
-
-                                                    <td class="text-right">
-                                                        @if ($shipment->stage <= 4)
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-            
-                                                                <button type="submit" class="my-table-link-delete">Delete</button>
-                                                            </form>
-                                                        @endif
-                                                    </td>
-                                                    
+                                                    <th></th>
+                                                    <th>Tracking Code</th>
+                                                    <th>Sender</th>
+                                                    <th>Receiver</th>
+                                                    <th>Status</th>
+                                                    <th class="text-right">Expected delivery</th>
+                                                    <th class="text-right">Actual delivery</th>
+                                                    <th></th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                
+                                            <tbody>
+                                                @foreach ($shipments as $shipment)
+                                                    <tr>
+                                                        <td>
+                                                            <img src="
+                                                                    @if ($shipment->stage >= 6)
+                                                                        
+                                                                        {{ asset('images/success-icon.png') }}
+                                                                    @elseif($shipment->stage <= 4)
+                                                                        {{ asset('images/warning-icon.png') }}
+                                                                    @else
+                                                                        {{ asset('images/info-icon.png') }}
+                                                                    @endif
+                                                                " alt="">
+                                                        </td>
+                
+                                                        <td>
+                                                            <p>
+                                                                <a href="{{ route('shipments.show', $shipment) }}" class="my-table-link"><strong>{{ $shipment->tracking_code }}</strong></a>
+                                                            </p>
+                                                        </td>
+
+                                                        <td>{{ $shipment->sender->name }}</td>
+
+                                                        <td>{{ $shipment->receiver->name }}</td>
+                
+                                                        <td>
+                                                            <span class="badge badge-pill 
+                                                                    @php
+                                                                        if($shipment->status->name == 'Pending')
+                                                                        {
+                                                                            echo 'badge-light';
+                                                                        }
+                                                                        elseif($shipment->status->name == 'Complete' OR
+                                                                                $shipment->status->name == 'Completed' OR
+                                                                                $shipment->status->name == 'Order Complete' OR
+                                                                                $shipment->status->name == 'Order Completed')
+                                                                        {
+                                                                            echo 'badge-success';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            echo 'badge-primary';
+                                                                        }
+                                                                    @endphp">{{ $shipment->status->name }}
+                                                                </span>
+                                                        </td>
+
+                                                        <td class="text-right">
+                                                            <small>
+                                                                @if ($shipment->expected_delivery_date)
+                                                                    {{ date('d M, Y', strtotime($shipment->expected_delivery_date)) }}
+                                                                @else
+                                                                    --
+                                                                @endif
+                                                            </small>
+                                                        </td>
+
+                                                        <td class="text-right">
+                                                            <small>
+                                                                @if ($shipment->actual_delivery_date)
+                                                                    {{ date('d M, Y', strtotime($shipment->actual_delivery_date)) }}
+                                                                @else
+                                                                    --
+                                                                @endif
+                                                            </small>
+                                                        </td>
+
+                                                        <td class="text-right">
+                                                            @if ($shipment->stage <= 4)
+                                                                <form action="" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                
+                                                                    <button type="submit" class="my-table-link-delete">Delete</button>
+                                                                </form>
+                                                            @endif
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div style="padding-bottom: 30px;">
+                                        {{ $shipments->links() }}
+                                    </div>
+                                @else
+                                    <div class="alert alert-info">
+                                        No shipment details found.
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
