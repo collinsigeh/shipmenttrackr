@@ -81,11 +81,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('shipments.index') }}">
+                                    <a class="dropdown-item" href="{{ route('address_book', 'senders') }}">
                                        Senders
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('shipments.create') }}">
+                                    <a class="dropdown-item" href="{{ route('address_book', 'receivers') }}">
                                        Receivers
                                     </a>
                                 </div>

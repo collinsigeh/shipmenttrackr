@@ -8,6 +8,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ModeController;
 use App\Http\Controllers\QuantityTypeController;
+use App\Http\Controllers\AddressBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,5 @@ Route::put('shipments/location/{location}/update', [ShipmentController::class, '
 Route::delete('shipments/{location}/delete_location', [ShipmentController::class, 'destroy_location'])->name('shipments.destroy_location');
 Route::post('shipments/search/', [ShipmentController::class, 'search'])->name('shipments.search');
 Route::get('shipments/list/{type?}', [ShipmentController::class, 'list'])->name('shipments.list');
+
+Route::get('address_book/{type?}', [AddressBookController::class, 'index'])->name('address_book');
