@@ -40,7 +40,7 @@
                                 
                                 @if ($shipments->count())
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover">
+                                        <table class="table table-sm table-hover table-striped">
                                             <thead class="text-muted">
                                                 <tr>
                                                     <th></th>
@@ -71,9 +71,7 @@
                                                         </td>
                 
                                                         <td>
-                                                            <p>
-                                                                <a href="{{ route('shipments.show', $shipment) }}" class="my-table-link"><strong>{{ $shipment->tracking_code }}</strong></a>
-                                                            </p>
+                                                            <a href="{{ route('shipments.show', $shipment) }}" class="my-table-link"><strong>{{ $shipment->tracking_code }}</strong></a>
                                                         </td>
 
                                                         <td>{{ $shipment->sender->name }}</td>
