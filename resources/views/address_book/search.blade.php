@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-9">
-                            {{ ucfirst($type) }} that match term:  <strong>{{ $search_term }}</strong>
+                            {{ ucfirst($type) }} that match the term:  <strong>{{ $search_term }}</strong>
                         </div>
 
                         <div class="col-3 text-right">
@@ -31,7 +31,7 @@
                                 <div class="text-right mb-3">
                                     <button data-toggle="modal" data-target="#searchAddress" class="btn btn-outline-primary mr-3">Search</button>
 
-                                    <button data-toggle="modal" data-target="#newAddress" class="btn btn-primary">New contact</button>
+                                    <a href="{{ route('address_book', $type) }}"  class="btn btn-primary">View all {{ $type }}</a>
                                 </div>
                                 
                                 @if ($addresses->count())
@@ -113,8 +113,6 @@
 </div>
 
 @include('modals.search_address')
-
-@include('modals.new_address')
 
 @foreach ($addresses as $address)
 

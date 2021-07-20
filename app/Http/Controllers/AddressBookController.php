@@ -145,7 +145,7 @@ class AddressBookController extends Controller
 
         $address->save();
 
-        return back()->with('success_status', 'Update saved');
+        return redirect()->route('address_book', $request->type)->with('success_status', 'Update saved');
     }
 
     /**
