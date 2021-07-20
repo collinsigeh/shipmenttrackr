@@ -9,6 +9,7 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ModeController;
 use App\Http\Controllers\QuantityTypeController;
 use App\Http\Controllers\AddressBookController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,7 @@ Route::get('address_book/{type?}', [AddressBookController::class, 'index'])->nam
 Route::post('address_book', [AddressBookController::class, 'store'])->name('address_book.store');
 Route::put('address_book/{id}/update', [AddressBookController::class, 'update'])->name('address_book.update');
 Route::post('address_book/search/{type?}', [AddressBookController::class, 'search'])->name('address_book.search');
+
+Route::get('account/profile/{account:username}', [AccountController::class, 'profile'])->name('account.profile');
+Route::put('account/profile/{account:username}', [AccountController::class, 'update'])->name('account.update');
+Route::put('account/change_password/{account:username}', [AccountController::class, 'change_password'])->name('account.change_password');

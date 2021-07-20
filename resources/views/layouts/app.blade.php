@@ -105,7 +105,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('settings.index') }}" class="dropdown-item">
+                                    <a href="{{ route('account.profile', auth()->user()) }}" class="dropdown-item">
                                         My account
                                     </a>
                                     
