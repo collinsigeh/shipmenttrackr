@@ -354,6 +354,13 @@
                     <p>Once all cargo items have been added. 
                         Click on the "<strong>Confirm shipment</strong>" to confirm that all cargo items have been added.
                     </p>
+
+                    <p>
+                        <strong>NOTE:</strong>
+                        <ul>
+                            <li>You will be able to add <em>shipment tracking history</em> after you confirm that all cargo items have been added.</li>
+                        </ul>
+                    </p>
                     
                     <!--
                     <p>

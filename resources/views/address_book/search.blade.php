@@ -7,11 +7,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-8">
-                            {{ ucfirst($type) }} <span class="badge badge-primary">{{ $total }}</span>
+                        <div class="col-9">
+                            {{ ucfirst($type) }} that match term:  <strong>{{ $search_term }}</strong>
                         </div>
 
-                        <div class="col-4 text-right">
+                        <div class="col-3 text-right">
                             <a href="{{ route('home') }}" class="my-default-link">&larr; Home</a>
                         </div>
                     </div>
