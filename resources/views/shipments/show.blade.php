@@ -337,7 +337,7 @@
 
                             @else
                                 <div class="alert alert-info">
-                                    No shipment history found.
+                                    No history found.
                                 </div>
                             @endif
                             
@@ -428,7 +428,7 @@
 
                             @else
                                 <div class="alert alert-info">
-                                    No cargo item added.
+                                    No cargo item found.
                                 </div>
                             @endif
                         </div>

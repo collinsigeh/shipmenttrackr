@@ -128,4 +128,23 @@ class AddressBookController extends Controller
     {
         //
     }
+
+    public function search(Request $request){
+
+        $this->validate($request, [
+            'type' => 'required',
+            'name' => 'required|min:4'
+        ]);
+
+        if($request->type == 'receiver' OR $request->type == 'receivers')
+        {
+            $addresses = Receiver::where('name', 'like', '%'.$request->name.'%')->simplePaginate(50);
+        }
+        else
+        {
+            $addresses = Sender::where('name', 'like', '%'.$request->name.'%')->simplePaginate(50);
+        }
+
+        return view('address_book.search')->with('addresses', $addresses);
+    }
 }

@@ -134,7 +134,7 @@
                                     </div>
                                 @else
                                     <div class="alert alert-info">
-                                        No shipment details found.
+                                        No details found.
                                     </div>
                                 @endif
                             </div>

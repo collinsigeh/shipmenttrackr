@@ -29,9 +29,9 @@
                             <div class="dashboard-info-set">
                     
                                 <div class="text-right mb-3">
-                                    <a href="" data-toggle="modal" data-target="#searchShipment" class="btn btn-outline-primary mr-3">Search</a>
+                                    <button data-toggle="modal" data-target="#searchAddress" class="btn btn-outline-primary mr-3">Search</button>
 
-                                    <a href="{{ route('shipments.create') }}" class="btn btn-primary">New contact</a>
+                                    <button data-toggle="modal" data-target="#newAddress" class="btn btn-primary">New contact</button>
                                 </div>
                                 
                                 @if ($addresses->count())
@@ -99,7 +99,7 @@
                                     </div>
                                 @else
                                     <div class="alert alert-info">
-                                        No shipment details found.
+                                        No details found.
                                     </div>
                                 @endif
                             </div>
