@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="senderSummary{{ $address->id }}Label">Update information</h5>
+                <h5 class="modal-title" id="editAddress{{ $address->id }}Label">Update information</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

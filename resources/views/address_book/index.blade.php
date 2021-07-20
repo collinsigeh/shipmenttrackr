@@ -112,6 +112,8 @@
     </div>
 </div>
 
+@include('modals.new_address')
+
 @foreach ($addresses as $address)
 
     @if ($type == 'receiver' OR $type == 'receivers')

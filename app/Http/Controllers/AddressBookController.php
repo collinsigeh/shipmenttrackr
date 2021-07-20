@@ -52,7 +52,37 @@ class AddressBookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        if($request->add_to_sender_confirmation != 1 && $request->add_to_receiver_confirmation != 1)
+        {
+            return back()->with('error_status', 'You need to specify the address book to save this contact.');
+        }
+
+        if($request->add_to_sender_confirmation == 1)
+        {
+            Sender::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+        }
+
+        if($request->add_to_receiver_confirmation == 1)
+        {
+            Receiver::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+        }
+
+        return back()->with('success_status', 'Contact saved!');
     }
 
     /**
