@@ -18,7 +18,7 @@ class ShipmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('track');
     }
 
     /**
@@ -753,6 +753,32 @@ class ShipmentController extends Controller
             'statuses' => $statuses,
             'senders' => $senders,
             'receivers' => $receivers,
+        ]);
+    }
+
+    public function track(Request $request)
+    {
+        $shipment = (object) array('locations' => (object) array());
+        $query = false;
+        $error_message = '';
+
+        if($request->tc)
+        {
+            ;
+            if($shipment = Shipment::where('tracking_code', $request->tc)->first())
+            {
+                $query = true;
+            }
+            else
+            {
+                $error_message = '<strong>' . $request->tc .'</strong> is invalid.';
+            }
+        }
+
+        return view('shipments.track')->with([
+            'shipment'=> $shipment,
+            'query' => $query,
+            'error_message' => $error_message,
         ]);
     }
 }
