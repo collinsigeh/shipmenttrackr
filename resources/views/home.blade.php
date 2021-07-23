@@ -76,6 +76,7 @@
                                 <tr>
                                     <th></th>
                                     <th>Tracking Code</th>
+                                    <th>Cargo Items</th>
                                     <th>Sender</th>
                                     <th>Receiver</th>
                                     <th>Status</th>
@@ -102,6 +103,8 @@
                                         <td>
                                             <a href="{{ route('shipments.show', $shipment) }}" class="my-table-link"><strong>{{ $shipment->tracking_code }}</strong></a>
                                         </td>
+
+                                        <td>{{ $shipment->items->count() . ' ' . Str::plural('item', $shipment->items->count()) }}</td>
 
                                         <td>{{ $shipment->sender->name }}</td>
 
