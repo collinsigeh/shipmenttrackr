@@ -113,7 +113,7 @@
 
                 <div class="modal-footer">
                     <a href="" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                    <input type="submit" class="btn btn-primary" value="Save item">
+                    <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>
         </div>
